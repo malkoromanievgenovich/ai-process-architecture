@@ -41,7 +41,11 @@ Distribute these rules across your projects using the automated engine.
 
 ### Quick Start
 
-1. **Configure**: Copy `sync-config.example.json` to `sync-config.json` and set your project paths.
+1. **Discover**: Automatically identify which modules your project needs:
+   - **Linux/macOS**: `./bin/discover.sh /path/to/your/project`
+   - **Windows**: `bin\discover.bat C:\path\to\your\project`
+   - _This will intelligently scan your project and update `sync-config.json`._
+
 2. **Automate**: Run the setup script to enable background synchronization via `cron`:
    - **Linux/macOS**: `./bin/setup.sh --install-cron`
    - **Windows**: `bin\setup.bat` (manually add to Task Scheduler)
