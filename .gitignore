@@ -5,5 +5,5 @@ sync.log
 .sync.lock
 
 # Dependency directories
-node_modules/
+scripts/node_modules/
 
