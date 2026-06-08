@@ -42,6 +42,27 @@ categories.forEach(cat => {
   }
 });
 
+// Validate sync-config.json
+const configPath = path.join(__dirname, '../sync-config.json');
+if (fs.existsSync(configPath)) {
+  try {
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    if (!config.projects || !Array.isArray(config.projects)) {
+      errors.push('sync-config.json must contain a "projects" array');
+    } else {
+      config.projects.forEach((proj, index) => {
+        if (!proj.name || !proj.path || !proj.modules) {
+          errors.push(`Project at index ${index} in sync-config.json is missing required fields (name, path, modules)`);
+        }
+      });
+    }
+  } catch (e) {
+    errors.push(`sync-config.json is not a valid JSON: ${e.message}`);
+  }
+} else {
+  console.log('Note: sync-config.json not found, skipping config validation.');
+}
+
 if (errors.length > 0) {
   console.error('Validation failed:');
   errors.forEach(err => console.error(`- ${err}`));
