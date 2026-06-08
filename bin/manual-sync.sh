@@ -36,19 +36,15 @@ cleanup() {
   rm -f "$LOCK_FILE"
 }
 
-# Install/Uninstall Cron
+# Install/Uninstall Cron (Disabled in manual-sync)
 install_cron() {
-  local script_path="$ROOT_DIR/bin/sync.sh"
-  local cron_cmd="$CRON_SCHEDULE $script_path --quiet"
-  
-  (crontab -l 2>/dev/null | grep -v "$script_path"; echo "$cron_cmd") | crontab -
-  echo "Cron job installed: $cron_cmd"
+  echo "Error: Use bin/setup.sh --install-cron for automation."
+  exit 1
 }
 
 uninstall_cron() {
-  local script_path="$ROOT_DIR/bin/sync.sh"
-  crontab -l 2>/dev/null | grep -v "$script_path" | crontab -
-  echo "Cron job removed."
+  echo "Error: Use bin/setup.sh --uninstall-cron to remove automation."
+  exit 1
 }
 
 # Handle Arguments

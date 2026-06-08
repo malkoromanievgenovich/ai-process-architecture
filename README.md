@@ -37,17 +37,26 @@ The framework is organized into modular specifications in the `modules/` directo
 
 ## 🔄 Rule Synchronization
 
-Distribute these rules across your projects using the built-in engine.
+Distribute these rules across your projects using the automated engine.
 
-### Setup & Run
+### Quick Start
 
-1. Copy `sync-config.example.json` to `sync-config.json`.
-2. Define projects and modules in `sync-config.json`.
-3. Run the sync:
-   - **Linux/macOS:** `./bin/sync.sh`
-   - **Windows:** `bin\sync.bat`
+1. **Configure**: Copy `sync-config.example.json` to `sync-config.json` and set your project paths.
+2. **Automate**: Run the setup script to enable background synchronization via `cron`:
+   - **Linux/macOS**: `./bin/setup.sh --install-cron`
+   - **Windows**: `bin\setup.bat` (manually add to Task Scheduler)
+3. **Manual Sync**: If you prefer to update rules manually:
+   - **Linux/macOS**: `./bin/manual-sync.sh`
+   - **Windows**: `bin\manual-sync.bat`
 
-_Note: The script merges selected modules into `GEMINI.md` and `CLAUDE.md` in the target project root._
+### Advanced Control
+
+The synchronization agent (`setup.sh`) supports several flags:
+- `--no-self-update`: Skip automatic `git pull` of this repository.
+- `--quiet`: Suppress terminal output (ideal for automation).
+- `--uninstall-cron`: Remove the automated sync task.
+
+_Note: You can also control automation by setting `"autoUpdate": false` in your `sync-config.json`._
 
 ## 🛠️ Adoption Flow
 
