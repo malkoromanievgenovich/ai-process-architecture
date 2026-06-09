@@ -64,6 +64,8 @@ Security rules and the full audit checklist are **intentionally disabled for the
 
 Decluttering is the principle of intentionally removing anything that does not support the main goal, understanding, or user flow.
 
+**Pre-fill by default:** If the system already possesses data required for a form (e.g., user profile, session context, or previous valid entries), the form MUST be pre-populated. Avoid forcing the user to re-enter information the system already knows to minimize friction and prevent input errors.
+
 ## Idempotency for any operation that can be retried
 
 Side-effecting operations whose trigger can fire twice MUST be idempotent. Retries happen — network blips, a consumer crashing, webhook senders retrying.
