@@ -127,3 +127,88 @@ Refer to CLAUDE.md for:
 - Specific guidelines and the expected standard for all work.
 
 When analyzing the system, designing interfaces, or writing copy, always apply the Decluttering lens to ensure the result is focused, useful, and free of unnecessary complexity.
+
+## Process Flow — document the process behind every interaction
+
+Every interactive element in an interface (button, form submission, system event) carries a process that transforms input into an observable outcome. This process is the **Process Flow**.
+
+A Process Flow is documented using a structured template. The level of detail adapts to the audience — the same flow is described differently for product context and engineering context:
+
+| Audience | Focus | Style |
+|---|---|---|
+| **Product** (stories, specs, user docs) | Observable result: what changes for the user, what feedback appears, where navigation leads. | Plain language, no technical terms. |
+| **Engineering** (implementation tasks, code docs) | Contract: services involved, endpoints, state mutations, error paths, side effects that influence the outcome. | Technical, concise. |
+
+Context determines which level applies. Gemini uses the product register when creating stories. Claude uses the engineering register when implementing.
+
+### What to include — impact-focused
+
+A flow documents only what **materially influences the outcome**:
+
+- **Conditions** that block or gate the process (validation, permissions)
+- **Branching** — distinct success and error paths
+- **State change** observable by the user or the system
+- **Side effects** that reach beyond the immediate action (email, notification, payment, external API)
+
+Internal mechanics that do not change observable behavior (logging, caching, metrics collection) are implementation details — they do not belong in the flow description.
+
+### Flow template
+
+```
+**Flow: [Action Name]**
+Trigger: [what initiates the process]
+Input:   [required data — form fields, context, params]
+
+Steps:
+  1. [first meaningful step]
+  2. [next step]
+  ...
+
+Success: [outcome + user feedback + navigation]
+Error:   [failure modes + user feedback + recovery path]
+Side effects: [email, notification, webhook — only if present]
+```
+
+The template is a **minimum structure**, not a rigid form. Sections with no content are omitted (e.g., a flow with no side effects drops that line). Additional context is added as needed — the goal is clarity, not ceremony.
+
+### Audience adaptation — same flow, two registers
+
+**Product register** (Gemini → Story ticket):
+
+```
+**Flow: Registration**
+Trigger: Submit registration form
+Input:   Name, email, password
+
+Steps:
+  1. Form fields are validated — errors shown inline
+  2. Account is created
+  3. Confirmation email is sent
+
+Success: Redirect to dashboard with a welcome message
+Error:   "Email already registered" — link to login offered
+Side effects: Confirmation email
+```
+
+**Engineering register** (Claude → Implementation):
+
+```
+**Flow: Registration**
+Trigger: Submit `RegistrationForm`
+Input:   `{ name: string, email: string, password: string }`
+
+Steps:
+  1. Client-side validation (schema: required, email format, password min 8)
+  2. `POST /api/auth/register` → CreateUserService
+  3. Check email uniqueness (UserRepository.findByEmail)
+  4. Create user entity (status: `pending_verification`)
+  5. Generate verification token (TTL: 24h)
+  6. Dispatch `SendVerificationEmail` event
+
+Success: 201 → redirect `/dashboard`, toast "Account created"
+Error:
+  - 409 (duplicate email) → inline error + link to `/login`
+  - 422 (validation) → field-level error messages
+  - 5xx → generic error toast + retry
+Side effects: Verification email via EmailService
+```
