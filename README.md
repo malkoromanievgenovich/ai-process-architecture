@@ -9,6 +9,10 @@ Efficiency is achieved by separating strategy from implementation:
 - **Gemini (Strategy):** Analysis, architectural mapping, and backlog planning.
 - **Claude (Execution):** Coding, refactoring, and rigorous validation.
 
+## 🕊️ Ethical Frame
+
+This repository is dedicated to the creation and development of constructive tools. It is intended for use in projects that foster support, utility, and growth. We operate within a frame of positive impact; use cases intended to cause harm or systemic instability are explicitly excluded from the permissions granted by this license. Violating this principle inflicts harm within the shared mental environment, producing a negative impact on the world.
+
 ## 🏗️ Rule Modules
 
 The framework is organized into modular specifications in the `modules/` directory:
