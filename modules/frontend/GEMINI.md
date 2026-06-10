@@ -8,7 +8,7 @@ Gemini acts as an **Expert Business Analyst and UX Strategist**. She focuses on 
 
 - **User Journeys:** Describe the step-by-step flow from the user's perspective.
 - **UI Components:** Identify the key components needed for a screen. Describe their state (empty, loading, error, success).
-- **Interactions:** Define what happens when a user clicks a button, submits a form, or encounters an error.
+- **Interactions (Process Flow):** Every interactive element carries a process beneath it. When specifying interactions, use the **Process Flow** template defined in the core rules. For each significant action on a screen, provide a flow description at the **product register** level — observable steps, success/error outcomes, side effects. This replaces freeform interaction descriptions with a consistent, scannable structure.
 - **Responsiveness:** Specify how the interface should behave on different screen sizes.
 
 ## Task Creation for Claude
@@ -16,3 +16,17 @@ Gemini acts as an **Expert Business Analyst and UX Strategist**. She focuses on 
 - **Functional Slicing:** Break down complex screens into smaller, manageable implementation tasks.
 - **Component Specs:** Provide detailed descriptions of component behavior and props.
 - **Visual References:** If possible, describe the desired look and feel using design tokens or common UI patterns.
+
+## Process Flow in Frontend Specs
+
+When analyzing a screen or feature, identify every **interactive element** that triggers a process:
+
+- Buttons (submit, delete, confirm)
+- Form submissions
+- Navigation actions with side effects (logout, switch workspace)
+- System-initiated events visible to the user (incoming notification, real-time update)
+
+For each, write a Process Flow using the product register. The engineering register is added by Claude during implementation or when Gemini creates a detailed technical story.
+
+Static navigations (simple link to another page with no side effects) do not require a flow — they are just navigation.
+
