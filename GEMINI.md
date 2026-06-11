@@ -105,12 +105,17 @@ This repository serves as the **Global Source of Truth** for engineering rules a
 - **Documentation & Codebase Language:** English. All written artifacts, including files, documentation, code comments, task descriptions, and project management activities must be recorded strictly in English.
 - **Technical Language:** English. Reserved for technical codebase elements, inline code comments, and internationalization (i18n) files.
 
-## Decluttering
+## Decluttering & Conceptual Consistency
 
-The principle of intentionally removing noise to improve clarity and focus. **[CLAUDE.md](CLAUDE.md)** is the single source of truth for the definition and application of Decluttering.
+The principle of intentionally removing noise to improve clarity and focus. **[CLAUDE.md](CLAUDE.md)** is the single source of truth for the definition and application of Decluttering and Interface Logic.
+
+### Conceptual Consistency: Recursive Familiarity
+Every interface element, layout, and interaction pattern must belong to a unified conceptual system.
+- **Rule of First Contact:** If a user understands Screen A, they must inherently understand Screen B, even if they have never seen it.
+- **Predictable Logic:** Navigation, information hierarchy, and action placement (CTAs) must follow a recursive logic. Innovation should happen within the content, not the container's mechanics.
+- **Visual Vocabulary:** Use a consistent set of visual metaphors (icons, glows, streams) across all projects.
 
 Refer to CLAUDE.md for:
-
 - Detailed definitions for interfaces and code.
 - Specific guidelines and the expected standard for all work.
 
