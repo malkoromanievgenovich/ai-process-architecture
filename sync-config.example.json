@@ -1,0 +1,17 @@
+{
+  "autoUpdate": true,
+  "projects": [
+    {
+      "name": "example-app",
+      "path": "/path/to/your/project",
+      "modules": [
+        "general",
+        "security",
+        "devops",
+        "nestjs",
+        "react",
+        "core"
+      ]
+    }
+  ]
+}
