@@ -109,6 +109,14 @@ This repository serves as the **Global Source of Truth** for engineering rules a
 
 The principle of intentionally removing noise to improve clarity and focus. **[CLAUDE.md](CLAUDE.md)** is the single source of truth for the definition and application of Decluttering and Interface Logic.
 
+### Self-Explanatory & Navigable Architecture
+The system and its documentation must be designed for the "First-Time Observer."
+- **First-Contact Clarity:** Design every flow assuming the user has never seen the system. Use concise text to guide and orient them from point A to point B.
+- **Progressive Discovery:** Start with essential information. Use links and references to expand understanding only when the user is ready.
+- **No Labyrinths:** If a user lands on a screen in the middle of a process, they must immediately understand where they are.
+- **Escape Paths:** Every internal screen must provide clear paths back to the primary entry points (Home/Dashboard) to prevent cognitive disorientation.
+- **Neatness over Complexity:** Favor a clean, predictable structure with obvious paths over feature-dense, confusing layouts.
+
 ### Conceptual Consistency: Recursive Familiarity
 Every interface element, layout, and interaction pattern must belong to a unified conceptual system.
 - **Rule of First Contact:** If a user understands Screen A, they must inherently understand Screen B, even if they have never seen it.
