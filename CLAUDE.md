@@ -18,6 +18,14 @@ A system is considered integral only when every part of it (code, data, document
 3.  **Alignment with Intent:** Code is merely a derivative of business logic. If the implementation deviates from the `Process Flow` described by Gemini, the system loses integrity. In case of conflict, the architectural description is updated first, followed by the code.
 4.  **Environmental Safety of Changes:** It is forbidden to introduce changes that leave the system in a "hanging" intermediate state (e.g., new database fields without logic to handle them).
 
+## Design as the Single Source of Truth (SoT)
+To prevent divergence between the conceptual vision and the technical implementation, we adhere to a strict Design-First policy.
+
+- **Design Dominance:** The design (currently managed via the **Claude Design** service) is the absolute Single Source of Truth for all UI, layouts, and visual interactions.
+- **Implementation Protocol:** Code must be a faithful realization of the design. Developers (and AI agents) are forbidden from making arbitrary visual changes directly in the code.
+- **Change Management:** Any modification to the interface—no matter how small—must first be applied to the design. Only after the design is updated and approved can it be handed over for implementation/coding.
+- **Violation Policy:** Direct "code-first" visual tweaks are considered architectural violations and must be blocked during review. The path to the UI always goes through the design.
+
 ## Audible attention signal — example configuration
 
 The user can be notified whenever Claude needs their attention. This can be achieved via **global hooks** (e.g., in `~/.claude/settings.json` using macOS `afplay` or similar tools on other OS), so it fires automatically:
