@@ -24,3 +24,5 @@ The framework provides a modular library of laws categorized by their role in th
 2. **Configuration:** Alignment of local paths to the universal pattern.
 3. **Resonance:** Continuous synchronization to maintain ethical integrity.
 4. **Manifestation:** Applying the Law to create constructive reality.
+
+P.S. These rules just an instrument. Responsibility of impact from product which was born based on these rules totally on person who using them.
