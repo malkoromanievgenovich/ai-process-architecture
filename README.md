@@ -18,11 +18,35 @@ The framework provides a modular library of laws categorized by their role in th
 - **Infrastructure & Delivery**: Declarative patterns for alignment and leveling of space.
 - **Domain-Specific Stacks**: Surgical patterns for backend, frontend, and mobile platforms.
 
-## 🛠️ The Flow of Sovereignty
+## 🛠️ Usage
 
-1. **Initialization:** Mirrored from the Source as the foundational Law.
-2. **Configuration:** Alignment of local paths to the universal pattern.
-3. **Resonance:** Continuous synchronization to maintain ethical integrity.
-4. **Manifestation:** Applying the Law to create constructive reality.
+This framework acts as the **Global Source of Truth**. Rules are managed here and synchronized to target projects.
 
-P.S. These rules just an instrument. Responsibility of impact from product which was born based on these rules totally on person who using them.
+### 1. Link a New Project
+Create `sync-config.json` in the root (see `sync-config.example.json`):
+```json
+{
+  "projects": [
+    {
+      "name": "your-project",
+      "path": "/absolute/path/to/project",
+      "autodetect": true
+    }
+  ]
+}
+```
+
+### 2. Synchronize
+Run the sync script to distribute the Law:
+```bash
+node scripts/sync.js
+```
+The script recursively scans your project, detects technologies (Next.js, Spring Boot, Docker, etc.), and injects relevant modules into `GEMINI.md` and `CLAUDE.md`.
+
+### 3. Maintain Integrity
+- **Never hand-edit** rule files in target projects.
+- **Update the Law** in the `modules/` directory of this repository.
+- **Sync** to propagate changes across the entire ecosystem.
+
+---
+P.S. These rules are just an instrument. Responsibility for the impact of products born from these rules rests entirely with the individual using them.
