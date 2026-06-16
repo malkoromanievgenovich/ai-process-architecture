@@ -623,6 +623,8 @@ A handler should do **only** what its name implies. Extract teardown/cleanup log
 - **Workflow Modularity:** Use reusable workflows to avoid duplication.
 - **Security:** Use OIDC for cloud provider authentication. Never use long-lived secrets/keys.
 - **Validation:** Every PR must trigger linting, security scanning (Trivy, Snyk), and unit tests.
+- **Version Gates:** The CI/CD pipeline must enforce that any PR with code changes bumps the project/module version. Prior to merging, the pipeline must check for version collisions with parallel merges/releases and require or automate a bump to a higher, unique version if a collision occurs.
+- **Post-Merge Release & Summary:** Upon merging a PR, the deployment/release workflow must display or publish a brief summary of what was done and the version containing the changes (e.g., as a GitHub Release, Slack notification, or release log).
 
 ## Docker & Containers
 
@@ -663,6 +665,8 @@ A system is integral only when every part of it (code, data, documentation, test
 2.  **Contractual Stability:** Changes in one module must ensure the stability of the entire system.
 3.  **Alignment with Intent:** Code is a derivative of business logic. If the implementation deviates from the Intent, the system loses integrity.
 4.  **Environmental Safety:** No changes that leave the system in a hanging intermediate state.
+5.  **Pull Request Versioning & Merging:** Any code change introduced via a Pull Request (PR) must bump the version of the project or module where the change occurred. Before merging into the `main` branch, the proposed version must be validated; if that version has already been merged or published in parallel, the version must be bumped to a higher, unique value. Bumping must be finalized before the merge.
+6.  **Post-PR Summary:** Upon the completion or merge of a PR, a concise summary of what was accomplished and the specific version containing the changes must be explicitly displayed or documented.
 
 ## Modular Sovereignty: The Body of Organs
 
