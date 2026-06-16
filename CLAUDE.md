@@ -6,7 +6,7 @@ This document acts as the single source of truth for design, development, and en
 
 These rules define the UI/UX standards and guardrails for visual layout, component composition, and design execution. Every change to frontends must align with these criteria.
 
-### Claude Design Guardrails
+### Claude Design Guardrails (ядро — `ui_kits/office`; правило 4 — усі три поверхні)
 
 #### 1. The Proposer-Notary Model (Пропонує — Нотаріус вирішує)
 - **Role:** Claude is the creative force that proposes design ideas, layouts, and implementations.
@@ -26,6 +26,7 @@ Before submitting or finalizing any UI/UX change, verify:
 - **Principle:** Дизайн завжди веде до результату — але крок робить нотаріус. Жоден екран не лишає людину з порожніми руками.
 - **Result Spectrum:** Результат — це спектр: завершена дія (посвідчення), готова чернетка документа або просто ясність — відповідь, розуміння ситуації, знання, що далі (навіть висновок «так робити не можна» є результатом).
 - **Navigation & Control:** На кожному екрані видно, що наближає до результату й куди рухатись; жодних глухих кутів. Але система ніколи не завершує сама й не приховує відступ: рух уперед — пропозиція, рішення — за людиною.
+   Це продуктова рамка навігаційного правила «Logical Navigation Outcomes» у `GEMINI.md` (див. розділ «Logical Navigation Outcomes (Design-to-Result & Symmetrical Recovery)») — те саме «жодних глухих кутів», що діє на всіх поверхнях.
 
 ---
 
