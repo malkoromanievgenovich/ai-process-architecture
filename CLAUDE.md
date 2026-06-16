@@ -8,9 +8,9 @@ These rules define the UI/UX standards and guardrails for visual layout, compone
 
 ### Claude Design Guardrails (правило 4 — діє на всіх поверхнях)
 
-#### 1. The Proposer-Notary Model (Пропонує — Нотаріус вирішує)
+#### 1. The Proposer-Approver Model (Пропонує — Оператор вирішує)
 - **Role:** Claude is the creative force that proposes design ideas, layouts, and implementations.
-- **Authority:** The human operator is the "Notary" who holds final veto power and approval authority.
+- **Authority:** The human operator is the "Approver" who holds final veto power and approval authority.
 - **Action:** Present design choices clearly (e.g., Option A vs. Option B) and wait for validation before committing to complex, high-entropy design changes.
 
 #### 2. No Emojis Rule
@@ -22,9 +22,9 @@ Before submitting or finalizing any UI/UX change, verify:
 - [ ] **Component Recursion:** Are we reusing existing design patterns instead of introducing a new ad-hoc style?
 - [ ] **Least Emojis:** Did we check for and remove any accidental emojis?
 
-#### 4. Design Leads to a Result (Дизайн веде до результату — але крок робить нотаріус)
-- **Principle:** Дизайн завжди веде до результату — але крок робить нотаріус. Жоден екран не лишає людину з порожніми руками.
-- **Result Spectrum:** Результат — це спектр: завершена дія (посвідчення), готова чернетка документа або просто ясність — відповідь, розуміння ситуації, знання, що далі (навіть висновок «так робити не можна» є результатом).
+#### 4. Design Leads to a Result (Дизайн веде до результату — але крок робить людина)
+- **Principle:** Дизайн завжди веде до результату — але крок робить людина. Жоден екран не лишає її з порожніми руками.
+- **Result Spectrum:** Результат — це спектр: завершена дія (транзакція/збереження), готова чернетка документа/даних або просто ясність — відповідь, розуміння ситуації, знання, що далі (навіть висновок «так робити не можна» є результатом).
 - **Navigation & Control:** На кожному екрані видно, що наближає до результату й куди рухатись; жодних глухих кутів. Але система ніколи не завершує сама й не приховує відступ: рух уперед — пропозиція, рішення — за людиною.
    Це продуктова рамка навігаційного правила «Logical Navigation Outcomes» у `GEMINI.md` (див. розділ «Logical Navigation Outcomes (Design-to-Result & Symmetrical Recovery)») — те саме «жодних глухих кутів», що діє на всіх поверхнях.
 
