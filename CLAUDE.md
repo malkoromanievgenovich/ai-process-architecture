@@ -359,7 +359,7 @@ Any scheduled job with a cadence less frequent than daily MUST also expose a boo
 
 #### Package Structure
 Follow the functional grouping within modules:
-`com.inertia.[module].[feature]`
+`com.[company].[module].[feature]`
 - `[feature].controller` - Web/API Layer
 - `[feature].service` - Business Logic Layer
 - `[feature].entity` - Domain Entities
