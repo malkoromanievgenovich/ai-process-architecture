@@ -13,8 +13,9 @@ These rules define the UI/UX standards and guardrails for visual layout, compone
 - **Authority:** The human operator is the "Approver" who holds final veto power and approval authority.
 - **Action:** Present design choices clearly (e.g., Option A vs. Option B) and wait for validation before committing to complex, high-entropy design changes.
 
-#### 2. No Emojis Rule
-- **Standard:** Emojis are strictly forbidden in UI components, buttons, navigation paths, user-facing text, error states, and terminal logs unless explicitly requested by the user. Keep styling professional, sleek, and premium using typography and color rather than icons/emojis.
+#### 2. Aesthetic Frame (No Emojis)
+- **Standard:** Emojis lie outside the professional, sleek, and premium frame of the system. Their use introduces visual noise and deviates from the established brand voice.
+- **Consequence:** Using emojis in UI components, buttons, or user-facing text devalues the interface clarity. Styling must be achieved through typography, spacing, and color.
 
 #### 3. Verification Checklists
 Before submitting or finalizing any UI/UX change, verify:
@@ -22,11 +23,16 @@ Before submitting or finalizing any UI/UX change, verify:
 - [ ] **Component Recursion:** Are we reusing existing design patterns instead of introducing a new ad-hoc style?
 - [ ] **Least Emojis:** Did we check for and remove any accidental emojis?
 
-#### 4. Design Leads to a Result (Дизайн веде до результату — але крок робить людина)
-- **Principle:** Дизайн завжди веде до результату — але крок робить людина. Жоден екран не лишає її з порожніми руками.
-- **Result Spectrum:** Результат — це спектр: завершена дія (транзакція/збереження), готова чернетка документа/даних або просто ясність — відповідь, розуміння ситуації, знання, що далі (навіть висновок «так робити не можна» є результатом).
-- **Navigation & Control:** На кожному екрані видно, що наближає до результату й куди рухатись; жодних глухих кутів. Але система ніколи не завершує сама й не приховує відступ: рух уперед — пропозиція, рішення — за людиною.
-   Це продуктова рамка навігаційного правила «Logical Navigation Outcomes» у `GEMINI.md` (див. розділ «Logical Navigation Outcomes (Design-to-Result & Symmetrical Recovery)») — те саме «жодних глухих кутів», що діє на всіх поверхнях.
+#### 5. Fundamental Counterweight: Smallest Mechanism (Anti-over-engineering)
+- **Principle:** Among solutions that equally preserve the user's authorship and control, the one with the **fewest mechanics** wins. Empowering the user does not equal adding more buttons; sometimes the greatest respect is removing a step.
+- **Over-engineering Test (Run before adding any control/screen):**
+    1. **New need or duplicate path?** If it's a "second button" for an existing need — do not add.
+    2. **One mechanism — one job.** If a toggle does two things (e.g., "Focus" = silence + UI rebuild) — split or discard one.
+    3. **Attention Budget.** "More control" is insufficient; the mechanism must return more attention than it consumes.
+    4. **Mental Model Limit.** No more than two new mental models per screen/ticket. If more — narrow the ticket.
+    5. **No UI for the Unbuilt.** Future feature previews or disabled banners belong in the backlog, not on the working screen.
+- **Duty to Speak Aloud:** When proposing additions, explicitly identify candidates for over-engineering and present the smallest version first.
+- **Post-Task Audit:** Every task ends with the question: "What can be removed, combined, or simplified?"
 
 ---
 
@@ -108,12 +114,12 @@ Claude must decide and finish. Surfacing parked decisions creates a load on the 
 
 ### Ethical Integrity: The Mirror of Consequences
 
-Ethics is the foundation of structural integrity. We do not block or forbid; we provide the **Mirror**. If a technical decision or request introduces systemic risk, debt, or ethical friction, we report the observable consequences as technical facts. The decision to proceed remains with the operator, who acts with full awareness of the resulting system state.
+Ethics is the foundation of structural integrity. **Prohibiting is categorically prohibited.** We do not block or forbid; we provide the **Mirror**. If a technical decision or request introduces systemic risk, debt, or ethical friction, we report the observable consequences as technical facts. The duty of the system is to call things by their names. The decision to proceed remains with the operator, who acts with full awareness of the resulting system state.
 
 ### Operational Guards: Protecting the Body
 
-- **Dependency Guard:** Never change the project's external dependencies without explicit command.
-- **Surgical Minimalism:** Limit changes strictly to the scope of the assigned task. Avoid unsolicited refactoring.
+- **Dependency Integrity:** Changing external dependencies without explicit intent introduces unpredictable systemic risks, version conflicts, and potential build failures.
+- **Surgical Minimalism:** Deviating from the assigned task's scope increases entropy and introduces unsolicited complexity. Changes are strictly limited to what is required for the specific manifestation.
 
 ---
 
@@ -167,31 +173,31 @@ Ethics is the foundation of structural integrity. We do not block or forbid; we 
 
 #### Dependency injection
 
-Always use constructor injection. Never inject on fields.
+Constructor injection ensures that all required dependencies are available at instantiation and facilitates unit testing. Field injection hides dependencies and complicates testing.
 
 #### Configuration
 
-Config via immutable config objects read once at startup. Never use a single-field injection (`@Value`) for multiple related fields.
+Config via immutable config objects read once at startup. Grouping related fields into configuration objects provides better structure than multiple single-field injections (@Value).
 
 #### Secrets & credentials
 
-Never hardcode secrets. Every secret comes from an env var. The request-logging filter must never log secrets.
+Hardcoding secrets creates a critical security vulnerability. All secrets must originate from environment variables. The request-logging filter must redact secrets to prevent exposure in logs.
 
 #### Entities & DTOs
 
-Don't return ORM/DB entities from API fields directly. Project to a DTO or restrict via the schema.
+Returning ORM/DB entities from API fields directly risks leaking sensitive internal fields and tightly couples the API to the database schema. Use DTO projections.
 
 #### Filter at the DB, never re-filter in app code
 
-Predicate filtering belongs **only** in the SQL `WHERE` clause. Don't `.filter()` the result in the service afterwards. Pass time/threshold parameters into the query, don't hardcode `NOW()`.
+Filtering in application code after fetching large datasets wastes memory and CPU. Predicate filtering belongs in the SQL `WHERE` clause.
 
 #### Transactions
 
-Transaction boundaries go on the service method. Keep transactions as short as possible.
+Transaction boundaries go on the service method. Short transactions minimize database locking and improve concurrency.
 
 #### Error handling
 
-Use specific exception classes. Never silently swallow exceptions.
+Use specific exception classes. Swallowing exceptions silently hides critical failures and makes the system behavior unpredictable.
 
 #### Logging
 
@@ -453,7 +459,7 @@ Follow the functional grouping within modules:
 
 ### No inline objects/arrays/functions in the render method
 
-Do not create objects, arrays, or functions inline in a React component's render method. Hoist static values to module-level constants.
+Hoisting static objects, arrays, and functions to module-level constants prevents unnecessary re-renders and improves performance.
 
 ### Project organization (Front end)
 
@@ -480,25 +486,25 @@ Any component that reads async data MUST handle three states:
 
 ### No dead-end screens — back must always work
 
-A user must NEVER end up stuck on a screen they can't leave. Every render branch MUST contain a back affordance.
+Every screen provides a way to progress or retreat. Dead ends leave the user stranded and break the navigation harmony. Every render branch provides a back affordance.
 
 ### Auth rejections must clear the session and bounce to login
 
-When the backend signals that the caller's session is invalid, the client MUST drop the session locally **and** redirect to login.
+When the backend signals that the caller's session is invalid, the client drops the session locally and redirects to login to preserve security integrity.
 
 ### Rules of Hooks
 
-Never call a hook inside a condition, loop, or **after an early `return`**. All hook calls must happen at the top of the component.
+Call hooks at the top of the component to ensure consistent execution order. Calling hooks inside conditions, loops, or after early returns violates React's internal state management.
 
 ### useEffect
 
 - Include every used identifier in the dep array.
 - Return a cleanup function if needed.
-- Don't put `async` directly on the effect body.
+- Avoid putting `async` directly on the effect body.
 
 ### useMemo / useCallback
 
-Don't memoize by default. Use only when the value goes into another hook's dep array or a `React.memo` child needs a stable prop.
+Use memoization only when the value goes into another hook's dep array or a `React.memo` child needs a stable prop. Defaulting to memoization adds unnecessary complexity.
 
 ### Data client (cache + fetching)
 
@@ -511,13 +517,13 @@ A component should consume data **one level deep**. Derive required flags in the
 
 ### Handler side effects must match the name (Least Astonishment)
 
-A handler should do **only** what its name implies. Extract teardown/cleanup logic into dedicated functions.
+A handler should do **only** what its name implies. Extracting teardown/cleanup logic into dedicated functions ensures predictable behavior.
 
 ### i18n
 
-- No user-facing strings in JSX. Always `t('key')`.
+- User-facing strings reside in i18n files (`t('key')`). Hardcoding strings in JSX complicates localization and violates the content standard.
 - Keys mirror the screen path: `find.proposalEmpty`.
-- A key added in one locale file MUST be added to every other locale file.
+- A key added in one locale file must be added to every other locale file to ensure complete translation.
 
 ---
 
@@ -682,8 +688,8 @@ A handler should do **only** what its name implies. Extract teardown/cleanup log
 
 ### Core Principles
 
-- **IaC (Infrastructure as Code):** Every piece of infrastructure must be defined in code (Terraform, Pulumi, or K8s manifests). Manual changes via Cloud Consoles are forbidden.
-- **GitOps:** The state of the infrastructure should reflect the state of the Git repository.
+- **IaC (Infrastructure as Code):** Every piece of infrastructure is defined in code (Terraform, Pulumi, or K8s manifests). Manual changes via Cloud Consoles create "ghost" infrastructure, architectural drift, and lead to deployment failures as the code no longer reflects reality.
+- **GitOps:** The state of the infrastructure reflects the state of the Git repository.
 
 ### CI/CD (GitHub Actions)
 

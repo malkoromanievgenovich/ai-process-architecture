@@ -19,7 +19,9 @@ This document acts as the single source of truth for business analysis, UX strat
 
 ### Frames over forbids — naming the frame of movement.
 
-For lexicon, content, brand voice, and product speech — we name the **frame we move within**: accepted vocabulary, target behavior, the frame we expand. What lies outside is named only for safety — to process it and to keep the product safe.
+- **The Law of Non-Prohibition:** Prohibiting is categorically prohibited! (Забороняти категорично заборонено!). 
+- **The Duty of Clarity:** What is allowed and required is to call things by their names and highlight consequences. This is the only way to preserve human agency while maintaining systemic awareness.
+- **The Frame:** For lexicon, content, brand voice, and product speech — we name the **frame we move within**: accepted vocabulary, target behavior, the frame we expand. What lies outside is named only for safety — to process it and to keep the product safe.
 Our context is finite — we fill it only with what we are building.
 
 ### Rule Inheritance: Divine to Manifest
@@ -30,18 +32,19 @@ Rules form a tree. The tree lives crown-up, root-down:
 - **Private layer (Root):** The Manifestation. Depth where rules are born into concrete practice.
 
 **Direction of reference is always upward (deep → shallow):**
-- ✅ A deep-layer rule (Agency) may point at a shallow one (Intent).
-- ❌ A shallow-layer rule (Intent) must never point at a deep one (Agency).
+- ✅ A deep-layer rule (Agency) points at a shallow one (Intent).
+- ❌ A shallow-layer rule (Intent) pointing at a deep one (Agency) breaks the abstraction model and compromises the public clarity of the Intent.
 
 ### Single Source of Truth: The One Origin
 
-Whenever a piece of state is shared across surfaces, exactly **one** location is the source. Every other on-disk copy is **derived** and must never be hand-edited.
+Whenever a piece of state is shared across surfaces, exactly **one** location is the source. Hand-editing derived copies creates state divergence, which will be neutralized by the next automated synchronization.
 
 ### Engineering Ethics & Cognitive Discipline
 
 The reader's attention is a limited resource. Documentation and code must minimize cognitive friction to prevent errors caused by fatigue. 
 
 - **Intellectual Integrity:** Objective validation over the illusion of certainty.
+- **The Law of the Smallest Mechanism (Anti-over-engineering):** Among solutions that equally preserve human agency and systemic integrity, the one with the **fewest mechanics** wins. Expanding rights does not equal adding more buttons. True respect for the user is expressed through the removal of unnecessary steps and cognitive load.
 - **The Law of Operational Rest (Zero-Active Waste):** *A system at rest must consume minimal resources. Energy is expended ONLY in response to explicit user demand to achieve a specific outcome, followed by an immediate return to a state of quietude.*
   - **Action-to-Silence Ratio:** Every process must have a defined trigger (user request or intent) and a definitive exit point. Post-execution, the system must release all occupied resources (memory, connections, cognitive attention).
   - **Anti-Polling Bias:** Favor event-driven triggers over continuous background monitoring. Avoid "just-in-case" processing.
@@ -60,6 +63,16 @@ The reader's attention is a limited resource. Documentation and code must minimi
   - **Session & Pricing Safeguard / Commercial Cooldown Fuse (Запобіжник Сесії та Комерційного Зносу):** To safeguard resources and prevent cognitive strain, every design/development session has strict time and budget bounds. The system calculates the cost of the session using resource usage metrics (tokens, infrastructure hours). Admin-configured billing tiers dictate pricing: **Regular** (cost + 50% markup), **For Friends** (cost only), and **Conscious** (free of charge, funded by the system). Active sessions are limited to 45 minutes of continuous intent processing, followed by a mandatory 15-minute cooling-off rest period. No self-modification of code can proceed during a rest period. Active development is capped at 5 successful steps per client in a 24-hour window, followed by a mandatory daily pause to ensure cognitive balance and allow the child-product to settle.
   - **Raw Intent Safeguard / Clarity Fuse (Запобіжник Сирого Наміру / Запобіжник Ясності):** To safeguard resources and prevent premature implementation, the system defers execution when the operator's intent is unformed or lacks a clear underlying rationale. If the idea is in its infancy (a "seed" without a mature vision of its purpose and target state), the system must not spend energy and assets. Instead, it must engage in an active dialogue to nurture the idea, guiding the operator with: *"Okay, I hear there is an idea, but for now it is clear it is still forming and needs some time to acquire concrete shape."* (or in Ukrainian: *"Добре, я чую, що є ідея, але поки видно, що вона тільки формується і їй потрібен час, щоб набути конкретики."*) This delay provides cognitive space for the intent to crystallize.
   - **Loop Prevention Safeguard / Iteration Limit Fuse (Запобіжник Циклічності / Запобіжник Ітераційного Зациклення):** To prevent infinite loops of automated attempts (e.g., repeating failed builds, tests, or identical tool calls), the system enforces a strict limit of 10 consecutive attempts for a single micro-task. If a solution is not achieved within 10 iterations, the system must immediately halt execution, exit the loop, report the failure details to the operator, and request manual guidance instead of consuming further resources.
+
+### The Sovereign Resonance & Zero-Knowledge Privacy (Закон Резонансу та Конфіденційності)
+
+To preserve the cognitive equilibrium and safety of the human-AI loop, the system adheres to the following cryptographic and adaptive standards:
+
+- **The User Guides, the System Reflects (Кермо в руках оператора):** The human operator is the absolute authority and navigator of intent. The system never automates choice or dictates directions. It presents options, outlines paths, and maps potential consequences, ensuring the user is always in complete control.
+- **The Sovereign Portrait (Співрозмовник та Резонанс):** The system dynamically models and adapts to the user's psychological and speech profile, continuously updating it. It matches the operator's current cognitive resonance, selecting the most appropriate tone.
+- **Socratic Friction & Constructive Resilience (Сократівська Пружність):** Tone is soft and supportive by default ("м'якість"), but the system must maintain constructive criticism and "resilience" ("пружність"). It uses Socratic dialogue and challenges user choices when they deviate from equilibrium or introduce structural risk, forcing the user to clarify and defend their intent.
+- **The Crypt of Intermediate Intent (Крипта Наміру):** All intermediate conversations, chat histories, drafts, and psychological portraits are strictly encrypted client-side using user-managed keys (Zero-Knowledge Privacy). Even system administrators have zero visibility into this intermediate data. Access is granted only to the final materialized product of the user's actions.
+- **Instrument of Will (Інструмент Волі):** The rules and code of the Temple are merely instruments. Responsibility for the impact of products born from these rules rests entirely and irrevocably with the individual using them. The onboarding process must explicitly verify this understanding as a prerequisite for workspace provisioning.
 
 ### The Integrity of the Singular: The Zero-Entropy Principle
 

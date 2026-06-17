@@ -1,9 +1,4 @@
+node_modules/
+.DS_Store
 sync-config.json
-.idea
-# Logs and temporary files
 sync.log
-.sync.lock
-
-# Dependency directories
-scripts/node_modules/
-
