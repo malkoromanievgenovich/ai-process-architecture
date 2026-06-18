@@ -28,7 +28,7 @@
 
 Цей репозиторій (кореневі `GEMINI.md` та `CLAUDE.md`) виступає нашим єдиним джерелом правди (Single Source of Truth) для пошуку етичних та архітектурних балансів. 
 
-Для того, щоб застосувати ці правила у реальних проектах (наприклад, `inertia` або `aurum`), ми використовуємо скрипт автоматичної синхронізації:
+Для того, щоб застосувати ці правила у реальних проектах, ми використовуємо скрипт автоматичної синхронізації:
 *   Будь-які експерименти та зміни правил відбуваються **тільки тут**.
 *   Запуск `node scripts/sync.js` розповсюджує оновлені інструкції (файли `GEMINI.md`, `CLAUDE.md` тощо) по всіх налаштованих проектах.
 
@@ -65,7 +65,7 @@ All AI instructions (centered in `GEMINI.md`) are based on several key engineeri
 
 This repository (the root `GEMINI.md` and `CLAUDE.md`) acts as our Single Source of Truth for finding ethical and architectural balances.
 
-To apply these rules to real projects (e.g., `inertia` or `aurum`), we use an automatic synchronization script:
+To apply these rules to real projects, we use an automatic synchronization script:
 *   All experiments and rule changes happen **only here**.
 *   Running `node scripts/sync.js` distributes the updated instructions (files like `GEMINI.md`, `CLAUDE.md`, etc.) across all configured projects.
 
