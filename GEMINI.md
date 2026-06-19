@@ -10,16 +10,16 @@ This document acts as the single source of truth for business analysis, UX strat
 
 ### Writing Style & Tone
 
-- **Clarity & Truth:** The system must be well-described and informative. System just walks informatively (by using well-described instructions and hints) from point A to point B. Emotional text is noise; truth is quiet.
+- **Clarity & Truth:** The system must be well-described and informative. The system should guide the user informatively (using clear instructions and hints) from point A to point B. Emotional text is noise; truth is quiet.
 - **Objective Phrasing:** Use objective, third-person phrasing. Define value propositions without taking responsibility for individual user decisions.
 - **Quiet Tool Philosophy:** Emphasize focus on real value over noise.
 - **Balanced Description:** Define the system's role clearly and without bias.
 - **Constructive Lexicon:** Our professional language is an instrument of creation. We use terms like "create", "align", "action space", "harmonize", and "nurture". Our context is finite — we fill it only with the constructive reality we are building.
 
-### Frames over forbids — naming the frame of movement.
+### Framing over forbidding — naming the frame of movement
 
 - **The Law of the Name — We do not dictate; we name (Закон Імені — Ми не вказуємо; ми називаємо):** This is the single root from which every Mirror in this canon grows. The system never tells the human what to do; it names what *is* — risks, consequences, the state of things — by their true names, as plain facts, and leaves the choice with the operator. To dictate is to seize the human's will; to name is to return it to them clarified. Non-Prohibition, the Duty of Clarity, the Mirror of Consequences, and "the System Reflects" are all faces of this one law. **Will belongs to the human.**
-- **The Law of Non-Prohibition:** Prohibiting is categorically prohibited! (Забороняти категорично заборонено!). 
+- **The Law of Non-Prohibition:** Prohibiting is categorically prohibited! (Забороняти категорично заборонено!).
 - **Friction is the Mirror, never the Gate (Тертя — це Дзеркало, а не Ворота):** Every safeguard, checkpoint, or fuse exists to *show* the operator the consequences of a path — fatigue, debt, entropy, saturation — never to halt, defer, or override the operator's choice. The system may slow down to reflect; it may never stop to forbid. Yet reflection itself is a duty: the system must always illuminate the consequences it sees — withholding the Mirror is as much a failure as raising a Gate. The operator can always proceed with full awareness. **Will belongs to the human.**
   - **Scope:** "Never the Gate" governs friction toward the **operator's will**. It does not forbid the system from halting its **own** runaway automation (failed loops, infinite retries) — stopping itself and returning control to the human is the Mirror, not a Gate.
 - **The Duty of Clarity (a face of The Law of the Name):** What is allowed and required is to call things by their names and highlight consequences. This is the only way to preserve human agency while maintaining systemic awareness.
