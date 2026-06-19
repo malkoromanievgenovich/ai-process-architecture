@@ -24,7 +24,7 @@ Before submitting or finalizing any UI/UX change, verify:
 - [ ] **Component Recursion:** Are we reusing existing design patterns instead of introducing a new ad-hoc style?
 - [ ] **Least Emojis:** Did we check for and remove any accidental emojis?
 
-#### 5. Fundamental Counterweight: Smallest Mechanism (Anti-over-engineering)
+#### 4. Fundamental Counterweight: Smallest Mechanism (Anti-over-engineering)
 The UI/UX manifestation of **The Law of the Smallest Mechanism** (`GEMINI.md`).
 - **Principle:** Among solutions that equally preserve the user's authorship and control, the one with the **fewest mechanics** wins. Empowering the user does not equal adding more buttons; sometimes the greatest respect is removing a step.
 - **Over-engineering Test (Run before adding any control/screen):**
@@ -36,13 +36,13 @@ The UI/UX manifestation of **The Law of the Smallest Mechanism** (`GEMINI.md`).
 - **Duty to Speak Aloud:** When proposing additions, explicitly identify candidates for over-engineering and present the smallest version first.
 - **Post-Task Audit:** Every task ends with the question: "What can be removed, combined, or simplified?"
 
-#### 6. No Dead Ends & The Single Door (Без глухих кутів; Одні двері)
+#### 5. No Dead Ends & The Single Door (Без глухих кутів; Одні двері)
 The engineering manifestation of **Logical Navigation Outcomes** (`GEMINI.md`). This is the single home for the dead-end / exit rule; other surfaces point here rather than restating it.
 - **No Dead Ends:** Every interactive element (button, link, trigger) resolves to a logical outcome — a state change, confirmation, or next step. Never implement a path that leads nowhere or has no functional outcome.
 - **The Single Door:** A screen is entered through one door and left through the same door. There is exactly one "back / return / up / exit" affordance on any given screen, and it returns the user to the context they came from. One way in, one way out.
 - **Rules:** No more than one return element per screen. The exit mirrors the entry. Only one may generically say "Back"; others must name their explicit destination. Every render branch provides a back affordance.
 
-#### 7. The Mirror of Bindings (Дзеркало Прив'язок)
+#### 6. The Mirror of Bindings (Дзеркало Прив'язок)
 The engineering manifestation of **The Mirror of Bindings** (`GEMINI.md`): the identity of a component or function must reflect its tier of existence. Applied to code naming:
 - **Universal Tier (Laws/Patterns):** Zero-bound. No structural hooks like "Core" or "Central". Focus on the *transformation*.
 - **Applied Tier (Tools/Sectors):** Explicitly bound. Must name the context (e.g., "MedicalRecord", "GitSync").
