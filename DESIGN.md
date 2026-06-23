@@ -75,6 +75,26 @@ How a product asks, confirms, and recovers decides whether the user trusts it. T
 - **Exits stay ungated.** Reversal actions (cancel, delete, unsubscribe) are one step — no forms, no mandatory "reason". (The design face of *Friction is the Mirror, never the Gate* — `GEMINI.md`.)
 - **Restraint over nagging.** At most one re-engagement nudge; silence if unanswered. Repeated prompting is noise that costs trust. (The interaction face of *Operational Rest / Cognitive Silence*.)
 
+## Accessibility — This Is for Everyone
+
+Design serves everyone, including people with impaired sight, motor control, or attention. Accessibility is the floor, not a feature.
+- **Contrast:** meet WCAG AA — at least 4.5:1 for body text, 3:1 for large text and meaningful UI.
+- **Never colour alone:** pair colour with text, icon, or shape — state must survive colour-blindness and grayscale.
+- **Keyboard-operable:** every action works without a mouse, with a **visible focus** indicator.
+- **Touch targets:** comfortably tappable (≈ 44–48px), with spacing between them.
+- **Name things for assistive tech:** labels, alt text, and roles so screen readers can announce every control.
+- **Respect reduced motion:** honour `prefers-reduced-motion`; never trap meaning in animation alone.
+- **Legible by default:** readable sizes, sufficient line spacing, no text baked into images.
+
+## Usability Principles
+
+Battle-tested heuristics filling the remaining gaps *(distilled from Nielsen's usability heuristics and the GOV.UK design principles)*:
+- **Visibility of system status:** always show what's happening — loading, progress, saved, offline, error. The user never guesses. (Pairs with the three async states, `CLAUDE.md`.)
+- **Match real-world conventions:** use metaphors, ordering, and terms the user already knows; mirror how the task works outside the screen, not the system's internal model.
+- **Prevent errors, don't just report them:** good defaults and constraints first; for consequential or destructive actions add a safety step — **undo**, or a confirmation only when the action is truly irreversible.
+- **Reversibility & control:** prefer reversible actions and undo over hard confirmations; always offer a clear way out of an unwanted state (extends **No Dead Ends & The Single Door**).
+- **Decide with evidence, not opinion:** design from real user needs and data; test and iterate. Objective validation over the illusion of certainty.
+
 ## Текст і копірайт — джерело правди (зовнішнє)
 
 Правила мови, тону й копірайту тут **не дублюються** (single source of truth).
