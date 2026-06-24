@@ -103,6 +103,14 @@ Every user-facing surface offers a clear, accessible way to reach the team — t
 - **Richer context, with consent:** the recent in-app navigation trail may be attached so the team sees the path — but **transparently** (the user sees and confirms what is sent), **minimised**, and **opt-in**. Tooling is the project's choice.
 - **Invited, never covert:** this is reporting the user *chose* — never always-on surveillance of everyone (*Substance-Check* and *Consent before contact*, `GEMINI.md`). We serve by listening when invited, not by watching.
 
+## The Human's Decision Is the Hero (Рішення людини — головний момент)
+
+The canon gives the human authority; the interface makes that authority **felt**. The AI's output recedes — calm and neutral; the human's approval is the **weightiest, most celebrated moment on the screen** (the design face of *Proposer-Approver* and *Will belongs to the human*, `GEMINI.md`).
+- **The decision is the hero, not the output:** visual weight goes to the human's *Approve*, not to what the AI generated.
+- **Acknowledge the act, instantly and warmly:** the moment they decide, a short confirmation honours **their** choice — the system thanks the decision, it does not report about itself.
+- **Speak in proposals:** every AI step is a draft awaiting the human's word ("proposed · sends only on your approval"); the AI never says "I did," only "here is a draft — the decision is yours."
+- **Felt, not faked:** the importance must be earned by real agency, never manufactured. Honour the human's word; no hollow celebration, no dark patterns. Keep acknowledgment warm but quiet (*Decluttering*).
+
 ## Текст і копірайт — джерело правди (зовнішнє)
 
 Правила мови, тону й копірайту тут **не дублюються** (single source of truth).
