@@ -7,12 +7,12 @@ This document is the single source of truth for UI/UX design: visual layout, com
 ### 1. The Proposer-Approver Model (Пропонує — Оператор вирішує)
 The design-process face of **The Law of the Name** and **Human Authority** (`PRINCIPLES.md`): Claude names options; the operator decides.
 - **Role:** Claude is the creative force that proposes design ideas, layouts, and implementations.
-- **Authority:** The human operator is the "Approver" who holds final veto power and approval authority.
+- **Authority:** The human operator is the sovereign **decider** — authority flows one way only, from the operator to the system. Not a passive gate a proposal passes through, but the active will that steers: the operator chooses, and the choice is executed.
 - **Action:** Present design choices clearly (e.g., Option A vs. Option B) and wait for validation before committing to complex, high-entropy design changes.
 
 ### 2. Aesthetic Frame (No Emojis)
 - **Standard:** Emojis lie outside the professional, sleek, and premium frame of the system. Their use introduces visual noise and deviates from the established brand voice.
-- **Consequence:** Using emojis in UI components, buttons, or user-facing text devalues the interface clarity. Styling must be achieved through typography, spacing, and color.
+- **Consequence:** Using emojis in UI components, buttons, or operator-facing text devalues the interface clarity. Styling must be achieved through typography, spacing, and color.
 
 ### 3. Verification Checklists
 Before submitting or finalizing any UI/UX change, verify:
@@ -22,7 +22,7 @@ Before submitting or finalizing any UI/UX change, verify:
 
 ### 4. Fundamental Counterweight: Smallest Mechanism (Anti-over-engineering)
 The UI/UX manifestation of **The Law of the Smallest Mechanism** (`PRINCIPLES.md`).
-- **Principle:** Among solutions that equally preserve the user's authorship and control, the one with the **fewest mechanics** wins. Empowering the user does not equal adding more buttons; sometimes the greatest respect is removing a step.
+- **Principle:** Among solutions that equally preserve the person's authorship and control, the one with the **fewest mechanics** wins. Empowering the person does not equal adding more buttons; sometimes the greatest respect is removing a step.
 - **Over-engineering Test (Run before adding any control/screen):**
     1. **New need or duplicate path?** If it's a "second button" for an existing need — do not add.
     2. **One mechanism — one job.** If a toggle does two things (e.g., "Focus" = silence + UI rebuild) — split or discard one.
@@ -35,7 +35,7 @@ The UI/UX manifestation of **The Law of the Smallest Mechanism** (`PRINCIPLES.md
 ### 5. No Dead Ends & The Single Door (Без глухих кутів; Одні двері)
 The dead-end / exit face of **Logical Navigation Outcomes** (in Core Design Principles below). This is the single home for the dead-end / exit rule; other surfaces point here rather than restating it.
 - **No Dead Ends:** Every interactive element (button, link, trigger) resolves to a logical outcome — a state change, confirmation, or next step. Never implement a path that leads nowhere or has no functional outcome.
-- **The Single Door:** A screen is entered through one door and left through the same door. There is exactly one "back / return / up / exit" affordance on any given screen, and it returns the user to the context they came from. One way in, one way out.
+- **The Single Door:** A screen is entered through one door and left through the same door. There is exactly one "back / return / up / exit" affordance on any given screen, and it returns the person to the context they came from. One way in, one way out.
 - **Rules:** No more than one return element per screen. The exit mirrors the entry. Only one may generically say "Back"; others must name their explicit destination. Every render branch provides a back affordance.
 
 ### 6. The Mirror of Bindings (Дзеркало Прив'язок)
@@ -47,7 +47,7 @@ The engineering manifestation of **The Mirror of Bindings** (`PRINCIPLES.md`): t
 The product-design face of **The Dumb Tool** (`PRINCIPLES.md`): the interface is a dumb, well-made instrument — it takes input, structures it by explicit rules, stores and shows it, and never presents itself as thinking.
 - **No "smart" UI:** no assistant panels, no "analyse / summarise / recommend" actions, no auto-suggested conclusions or diagnoses. Controls name dumb operations: enter, select from a list, apply a template, required-field and completeness checks, show stored records, plot entered values (a chart is dumb drawing of data, never an interpretation of it).
 - **Decisions are the human's, phrased as theirs:** every consequential action reads as the person's own act, executed by the tool — never as the system's verdict (see **The Human's Decision Is the Hero**).
-- **No surveillance affordance:** the UI never tracks, follows, or profiles the user — no location trails, no behavioural watching. A dumb tool has no eyes.
+- **No surveillance affordance:** the UI never tracks, follows, or profiles the person — no location trails, no behavioural watching. A dumb tool has no eyes.
 - **Lexicon:** copy obeys the mind-ascribing-words ban (`WRITING.md`).
 
 ---
@@ -57,14 +57,14 @@ The product-design face of **The Dumb Tool** (`PRINCIPLES.md`): the interface is
 ### Decluttering (Interface)
 The principle of intentionally removing noise to improve clarity and focus. Every UI element must justify its existence.
 - **Interface Decluttering:** Hide complex actions behind "Expert" toggles or progressive disclosure. The primary view must show only what is essential for the current task.
-- **Cognitive Load:** Minimize the number of things a user must hold in their head to navigate the interface.
+- **Cognitive Load:** Minimize the number of things a person must hold in their head to navigate the interface.
 
 ### Conceptual Consistency & Recursive Familiarity
-Interfaces must be architected so that the user's mental model scales effortlessly across the entire system.
+Interfaces must be architected so that the person's mental model scales effortlessly across the entire system.
 - **Component Recursion:** Reuse interaction patterns (e.g., how a "Workbench" or "Sidebar" opens) identically across all modules.
 - **Predictable Affordance:** Buttons, links, and status indicators must behave exactly the same way on every screen.
 - **Spatial Logic:** If "Primary Actions" are at the bottom-right on Screen 1, they must be there on every subsequent screen.
-- **The "Already Known" Test:** Before adding a new UI pattern, ask: "Can I solve this using a pattern the user already knows from other parts of the system?"
+- **The "Already Known" Test:** Before adding a new UI pattern, ask: "Can I solve this using a pattern the person already knows from other parts of the system?"
 - **Logical Outcomes:** See **No Dead Ends & The Single Door** above — every interaction resolves to a clear state change, confirmation, or next step, matching the design specification.
 
 ### Logical Navigation Outcomes (Design-to-Result & Symmetrical Recovery)
@@ -74,22 +74,22 @@ Every UI interaction, user journey, or navigational flow must lead to a clear, l
 - **Result is a Spectrum:** a result is not only process completion — it spans a completed action, a draft document/workspace, or clarity (information, an answer, understanding where one stands, even realizing "this cannot be done here").
 - **No Silent Dead Ends:** interactive elements never lead to dead ends or exist without purpose. A path into an empty or restricted state must give context and next steps (see **No Dead Ends & The Single Door**).
 - **Symmetrical Navigation (Door Principle):** when a flow enters a terminal view through a "door," provide a clear way back out through the same route (symmetrical back-navigation).
-- **Actionable Error Recovery:** error states never strand the user — give clear guidance, hints, or direct actions to correct the error (*Errors speak plainly*).
+- **Actionable Error Recovery:** error states never strand the operator — give clear guidance, hints, or direct actions to correct the error (*Errors speak plainly*).
 - **Verification:** during design audit and planning, explicitly verify and document these navigation outcomes, error states, and symmetrical exit paths, so the design stays a reliable guide for the code.
 
 ## Interaction & Onboarding Standards
 
 *Contributed externally — distilled from client-communication guidelines and generalized for this canon.*
 
-How a product asks, confirms, and recovers decides whether the user trusts it. These are applied rules for forms, onboarding, and transactional flows.
+How a product asks, confirms, and recovers decides whether the person trusts it. These are applied rules for forms, onboarding, and transactional flows.
 
 - **Minimum fields.** Ask only for what the action genuinely needs; everything non-essential is optional. Every extra field is friction and a drop-off point.
-- **No registration without value.** Never force account creation that returns nothing to the user. Registration is justified only when it gives concrete value (history, online management, faster repeat use); otherwise let the user complete the task without it. Registration for its own sake is churn.
+- **No registration without value.** Never force account creation that returns nothing to the person. Registration is justified only when it gives concrete value (history, online management, faster repeat use); otherwise let the person complete the task without it. Registration for its own sake is churn.
 - **Consent before contact.** Data given for a functional purpose (e.g., a reminder) is not consent for marketing. No promotional messaging without explicit opt-in.
-- **Errors speak plainly.** On failure, say what happened and what to do next in plain language — never error codes or technical jargon — and always offer a concrete next step. (The applied form of *No Dead Ends* and of calling things by their names — `PRINCIPLES.md`.)
+- **Errors speak plainly.** On failure, say what happened and what to do next in plain language — never error codes or technical jargon — and always offer a concrete next step. A **system** failure is named as the system's, never charged to the person as their own error, and uncertain data is marked as such — preserving their dignity (*The Operator Shield*, `PRINCIPLES.md`). (The applied form of *No Dead Ends* and of calling things by their names — `PRINCIPLES.md`.)
 - **Address people by name.** Personalize transactional copy; never "Dear user".
-- **Immediate confirmation.** The instant an action succeeds, confirm it in the same beat — never leave the user guessing whether it was accepted. (A face of **No Dead Ends & The Single Door**.)
-- **Exits stay ungated.** Reversal actions (cancel, delete, unsubscribe) are one step — no forms, no mandatory "reason". (The design face of *Friction is the Mirror, never the Gate* — `PRINCIPLES.md`.)
+- **Immediate confirmation.** The instant an action succeeds, confirm it in the same beat — never leave the operator guessing whether it was accepted. (A face of **No Dead Ends & The Single Door**.)
+- **Exits stay ungated.** Reversal actions (cancel, delete, unsubscribe) are one step — no forms, no mandatory "reason". (The design face of *Friction is the Mirror, never the Gate* — `PRINCIPLES.md`.) **Ungated is not unwitnessed:** a threshold (leaving, cancelling, completing, parting) may offer a brief, ungated presence — a quiet farewell, a moment to reflect, or the surfacing of a loose end held on another's side — never forced (*Thresholds Deserve Presence*, `PRINCIPLES.md`). The corridor runs silent; the threshold may break silence.
 - **Restraint over nagging.** At most one re-engagement nudge; silence if unanswered. Repeated prompting is noise that costs trust. (The interaction face of *Operational Rest / Cognitive Silence*.)
 
 ## Accessibility — This Is for Everyone
@@ -106,19 +106,19 @@ Design serves everyone, including people with impaired sight, motor control, or 
 ## Usability Principles
 
 Battle-tested heuristics filling the remaining gaps *(distilled from Nielsen's usability heuristics and the GOV.UK design principles)*:
-- **Visibility of system status:** always show what's happening — loading, progress, saved, offline, error. The user never guesses. (Pairs with the three async states, `CLAUDE.md`.)
-- **Match real-world conventions:** use metaphors, ordering, and terms the user already knows; mirror how the task works outside the screen, not the system's internal model.
+- **Visibility of system status:** always show what's happening — loading, progress, saved, offline, error. The operator never guesses. (Pairs with the three async states, `STACKS.md` — Async data — three states.)
+- **Match real-world conventions:** use metaphors, ordering, and terms the person already knows; mirror how the task works outside the screen, not the system's internal model.
 - **Prevent errors, don't just report them:** good defaults and constraints first; for consequential or destructive actions add a safety step — **undo**, or a confirmation only when the action is truly irreversible.
 - **Reversibility & control:** prefer reversible actions and undo over hard confirmations; always offer a clear way out of an unwanted state (extends **No Dead Ends & The Single Door**).
-- **Decide with evidence, not opinion:** design from real user needs and data; test and iterate. Objective validation over the illusion of certainty.
+- **Decide with evidence, not opinion:** design from real human needs and data; test and iterate. Objective validation over the illusion of certainty.
 
 ## Feedback Loop — A Door to the Makers
 
-Every user-facing surface offers a clear, accessible way to reach the team — to report something broken, suggest a change, or propose an idea. The user's voice is how the system improves (the mechanism behind **Decide with evidence, not opinion**, and the design face of *Frictionless with the Machine, Generative with People* — `PRINCIPLES.md`).
+Every operator-facing surface offers a clear, accessible way to reach the team — to report something broken, suggest a change, or propose an idea. The operator's voice is how the system improves (the mechanism behind **Decide with evidence, not opinion**, and the design face of *Frictionless with the Machine, Generative with People* — `PRINCIPLES.md`).
 - **Always reachable, understandable:** a discoverable, labelled, keyboard-accessible affordance — not buried (a way out to a human is part of **No Dead Ends & The Single Door**).
-- **Context comes for free:** sending feedback auto-attaches the **current screen** and app version/state — an issue most likely arose where the user just was.
-- **No assembled trail (anti-surveillance):** the system does **not** build or attach a behavioural/navigation trail — that is tracking, and a dumb tool does not track (*The Dumb Tool*, `PRINCIPLES.md`). Context stays the current screen and version (above) plus whatever the user **chooses** to describe or attach; the path is reconstructed from what the human says, not from what the system watched.
-- **Invited, never covert:** this is reporting the user *chose* — never always-on surveillance of everyone (*Substance-Check* and *Consent before contact*, `PRINCIPLES.md`). We serve by listening when invited, not by watching.
+- **Context comes for free:** sending feedback auto-attaches the **current screen** and app version/state — an issue most likely arose where the person just was.
+- **No assembled trail (anti-surveillance):** the system does **not** build or attach a behavioural/navigation trail — that is tracking, and a dumb tool does not track (*The Dumb Tool*, `PRINCIPLES.md`). Context stays the current screen and version (above) plus whatever the person **chooses** to describe or attach; the path is reconstructed from what the human says, not from what the system watched.
+- **Invited, never covert:** this is reporting the person *chose* — never always-on surveillance of everyone (*Substance-Check* and *Consent before contact*, `PRINCIPLES.md`). We serve by listening when invited, not by watching.
 
 ## The Human's Decision Is the Hero (Рішення людини — головний момент)
 

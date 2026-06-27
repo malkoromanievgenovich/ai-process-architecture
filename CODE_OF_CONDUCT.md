@@ -1,6 +1,6 @@
 # Code of Conduct: Engineering Ethics
 
-Our Code of Conduct is built on the principles of **Operational Stability** and **Cognitive Load Management**. We strive to create an environment where technology serves human intelligence, and where every contributor follows structured discipline.
+Our Code of Conduct is rooted in the written apex (`PRINCIPLES.md`): *Integrity Is Health* (a system serves only while whole), *The Law of Operational Rest* (energy spent only on explicit intent, then a return to silence), and the duty to guard the reader's finite attention against cognitive friction (*Engineering Ethics & Cognitive Discipline*). We apply *The Law of the Name* — we name consequences, never forbid — and honour *Experience Belongs to the Human*: we do not automate a person's growth or seize their decision. We strive for an environment where technology serves human intelligence, and where every contributor follows structured discipline.
 
 ## Our Standards
 

@@ -14,7 +14,7 @@ Ceremony exists only to help humans deliver and learn together. A ritual that st
 
 ## Events
 
-- **Sprint:** a short, fixed cadence producing a usable increment. Scope is set at planning; the goal is protected from mid-sprint churn (*Focused Execution*, `CLAUDE.md`).
+- **Sprint:** a short, fixed cadence producing a usable increment. Scope is set at planning; the goal is protected from mid-sprint churn (*Environmental Safety — Focused Execution*, `CLAUDE.md`).
 - **Planning:** the team *pulls* what it can finish to Done against a clear Sprint Goal — pull, never push.
 - **Daily:** a brief re-sync toward the goal and surfacing of blockers — for the team, not a status report to a manager.
 - **Review:** show the working increment to stakeholders and gather signal (*Signal, Not Verdict*, `PRINCIPLES.md`).
@@ -25,11 +25,12 @@ Ceremony exists only to help humans deliver and learn together. A ritual that st
 - **Product backlog:** the single ordered list of what could be done; refined continuously, with only the top made ready.
 - **Sprint backlog:** the Sprint Goal plus the slice pulled to reach it; owned by the team.
 - **Increment:** working, releasable software each sprint.
+- **Definition of Ready:** a story enters the Sprint backlog only when its value is named, its acceptance criteria are written and agreed with the stakeholder, and blocking dependencies are surfaced and cleared — or explicitly accepted as Sprint risk. Ready gates entry; Done gates exit; together they guard the integrity of the flow (*Integrity Is Health*, `PRINCIPLES.md`).
 - **Definition of Done:** an explicit, shared checklist of what "complete" means — tested, reviewed, integrated, documented; nothing is Done until it meets it (*Completeness of Execution*, `CLAUDE.md`).
 - **WIP limits & finishing:** limit work in progress; a thing half-done delivers nothing. Optimize for finishing, not starting (*Finish to Zero*, `CLAUDE.md`).
 
 ## Estimation & Pace
 
 - **Relative, not false-precise:** estimate by relative size (story points), not borrowed-certainty hours; the spread is information, not a promise.
-- **Velocity is a Mirror, not a target:** it helps the team forecast; it is never a stick to push with or to compare people by (*Signal, Not Verdict*; *Never Weaponize Need*, `PRINCIPLES.md`). Pressuring velocity only corrupts the estimate.
+- **Velocity is a Mirror, not a target:** it helps the team forecast; it is never a stick to push with or to compare people by (*Signal, Not Verdict*; *Never Weaponize Need*, `PRINCIPLES.md`). Pressuring velocity only corrupts the estimate. The symmetric failure is as real: dismissing the team's own signals of strain — fatigue, blocked paths, growing debt — is the opposite drift. Hear all, weight by confirmation; outward pressure to stretch and inward pain to ignore are equally real risks.
 - **Sustainable pace:** a cadence the team can hold indefinitely; burnout is waste, not virtue (*Operational Rest*, `PRINCIPLES.md`).

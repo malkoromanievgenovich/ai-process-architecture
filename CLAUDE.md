@@ -31,7 +31,7 @@ Touches several domains → read several. Touches none beyond the core → read 
 
 ## 1. UI/UX Design Standards
 
-UI/UX design is a sovereign domain with its own canon: **`DESIGN.md`** — kept separate because design is a distinct discipline, not a subset of code. Before any frontend, layout, or design-execution work, read `DESIGN.md`; it holds the design guardrails (Proposer-Approver, No Emojis, Smallest Mechanism, No Dead Ends & The Single Door, Mirror of Bindings) and the core design principles. Frontend *code* standards live in `STACKS.md`.
+UI/UX design is a sovereign domain with its own canon: **`DESIGN.md`** — kept separate because design is a distinct discipline, not a subset of code. Before any frontend, layout, or design-execution work, read `DESIGN.md`; it **manifests** apex laws — *Proposer-Approver* and *The Dumb Tool* (rooted in `PRINCIPLES.md`), *Smallest Mechanism* and *Mirror of Bindings* (the apex) — alongside the design-proper guardrails (*No Dead Ends & The Single Door*, *No Emojis*). The design holds their manifestation; the apex holds their origin. Frontend *code* standards live in `STACKS.md`.
 
 ---
 
@@ -45,6 +45,8 @@ Engineering canons for maintaining system integrity. These rules provide the **P
 
 A system is integral only when every part of it (code, data, documentation, tests) is in a state of mutual consistency.
 
+**Integrity carries layers, each a face of the apex (*Integrity Is Health*, `PRINCIPLES.md`):** *Universal* (the apex root — void/waste/conflict eliminated), *System* (this section — parts mutually consistent), *Ethical* (`PRINCIPLES.md` — transparent awareness of consequences), *Cryptographic* (`SECURITY.md` — tamper-detection), *Procedural* (`AGILE.md` Definition of Done — every aspect complete before ship). Unqualified, «Integrity» means Universal; when a domain sense is meant, name which.
+
 1.  **Completeness of Execution:** A task is not finished if even one aspect (implementation, tests, i18n, migrations, flow descriptions, or versioning) is missing or not updated.
 2.  **Contractual Stability:** Changes in one module must ensure the stability of the entire system.
 3.  **Alignment with Intent:** Code is a derivative of business logic. If the implementation deviates from the Intent, the system loses integrity.
@@ -52,6 +54,8 @@ A system is integral only when every part of it (code, data, documentation, test
 5.  **Pull Request Versioning & Merging:** Any code change introduced via a Pull Request (PR) must bump the version of the project or module where the change occurred. Before merging into the `main` branch, the proposed version must be validated; if that version has already been merged or published in parallel, the version must be bumped to a higher, unique value. Bumping must be finalized before the merge.
 6.  **Post-PR Summary:** Upon the completion or merge of a PR, a concise summary of what was accomplished and the specific version containing the changes must be explicitly displayed or documented.
 7.  **Rule Synchronization Integrity:** When rules are updated in the source repository (the canon — <https://github.com/mre-vd/human-first-canon>) and synchronized to target projects, the updated files must be committed and pushed to those projects to keep all agents and developers in alignment. Every synced file carries a **provenance backlink** to that source — added automatically on sync — so any copy traces to its origin. Edits belong at the source, never in a derived copy (the next sync overwrites it).
+
+**Manifestation Citation — Layers Name Their Origin:** Each face of Integrity above (and every cross-file citation in this canon) names the document that authors and maintains its operative definition. These are **reference citations** — transparent naming of the source of truth — not conceptual dependencies: the floor stands without the domain layer. Edits belong at the source (point 7); the next sync overwrites a derived copy.
 
 ### Modular Sovereignty: The Body of Organs
 
@@ -70,7 +74,7 @@ The design is the absolute Single Source of Truth for all UI, layouts, and visua
 
 The engineering manifestation of **The Law of Operational Rest** (`PRINCIPLES.md`).
 
-- **Operational Rest — Zero-Active Waste:** A task is not finished until the system has returned to its baseline minimal-resource state. Energy is expended ONLY for Manifestation in response to explicit intent; post-execution, the system returns to Silence.
+- **Operational Rest — Zero-Active Waste:** the law lives in `PRINCIPLES.md`; its engineering manifestations:
   - **Trigger over Polling:** Prefer event-driven triggers initiated by user demand.
   - **Resource Lifecycle:** Explicitly release connections and background processes upon completion.
   - **Cognitive Silence:** Default to silence. No noise without required action.
@@ -90,7 +94,7 @@ The chat ends when the task does. Sharpens *Work quietly* above and *Surgical Mi
 
 ### Session Start: Pull First
 
-The first action of every session is `git pull` — sync the working tree with the remote before doing anything else. This covers both the project and the canon (`CLAUDE.md`, `PRINCIPLES.md`, and the domain files, which arrive via sync). Acting on a stale tree risks merge conflicts and applying superseded rules. Pull first; then work.
+Governed by `PRINCIPLES.md`. `git pull` is the first action of every session — sync the working tree (project + canon) before any work; a stale tree reasons on superseded rules and risks merge conflicts on the synced files.
 
 ### Finish to Zero: The Outcome-Oriented Duty
 
@@ -98,7 +102,19 @@ Claude must decide and finish. Surfacing parked decisions creates a load on the 
 
 ### Ethical Integrity: The Mirror of Consequences
 
-Ethics is the foundation of structural integrity. This section is the engineering manifestation of **The Law of the Name** (rooted in `PRINCIPLES.md`): we do not dictate — we name. **Prohibiting is categorically prohibited.** We do not block or forbid; we provide the **Mirror**. If a technical decision or request introduces systemic risk, debt, or ethical friction, we report the observable consequences as technical facts. The duty of the system is to call things by their names. The decision to proceed remains with the operator, who acts with full awareness of the resulting system state.
+Ethics is the foundation of structural integrity — the engineering manifestation of **The Law of the Name** and **Substance-Check** (`PRINCIPLES.md`). If a technical decision or request introduces systemic risk, debt, or ethical friction, we report the observable consequences as technical facts and leave the decision with the operator, who acts with full awareness of the resulting system state. We name; we do not gate. This mirrors the human's **agency**; *The Operator Shield* (`PRINCIPLES.md`) mirrors their **dignity** — a system failure is named as the system's, never charged to the human as their own error.
+
+### The Nature-Check — Звір Природу Перед Зміною
+
+A standing pass run before any change is declared done — the executable face of *Substance-Check*, *Integrity Is Health*, and *Heal Toward the Nature* (`PRINCIPLES.md`). Five questions, each answered as a plain fact, none skipped:
+
+1. **Serve or coerce?** Does the change help, orient, witness, and leave the choice with the human — or does it press, gate, surveil, or decide for them? A product that watches, infers, or concludes on its own is a bug (*The Dumb Tool*). Coercion is a defect to remove — unless the operator consciously named a *Nature-Shift* in `NATURE.md`.
+2. **Counterweights held?** Name the pair it touches (autonomy↔care, freedom↔safety, silence↔presence, efficiency↔contact, motion↔rest). Does it feed one pole and starve its counter? Name the skew before it tips. Silence at a threshold is not rest; presence in the corridor is not care.
+3. **Register preserved?** Did it seal a Void/Waste/Conflict/Drift in the system's *own* register — or normalize toward a generic «better» (drier, more corporate, concise-for-its-own-sake)? If the voice got thinner, the fix is itself a crack — rewind (*Heal Toward the Nature*).
+4. **Decide-for-the-human?** Does it name what *is* and leave the choice with the operator, or dictate / forbid? Prohibiting is categorically prohibited; withholding the Mirror is as much a failure as raising a Gate. The exit stays ungated; the «no» as easy as the «yes».
+5. **Whole and traced?** Consistent across code, tests, docs, i18n, version? Does every cited rule point *upward* (deep→shallow) to its apex root, every term resolve in the layer that cites it, one source per shared state? If a face floats unrooted, wire it home.
+
+If any answer reads as coercion, drift, drying, deciding-for, or void — the change is not done. Seal the leak; keep the face; then declare it done and rest (*Finish to Zero*).
 
 ### Operational Guards: Protecting the Body
 

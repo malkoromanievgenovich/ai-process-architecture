@@ -14,7 +14,7 @@ Platform and infrastructure engineering is a sovereign domain — kept separate 
 - **Workflow Modularity:** Use reusable workflows to avoid duplication.
 - **Security:** Use OIDC for cloud provider authentication. Never use long-lived secrets/keys.
 - **Validation:** Every PR must trigger linting, security scanning (Trivy, Snyk), and unit tests.
-- **Version Gates:** The CI/CD pipeline must enforce that any PR with code changes bumps the project/module version. Prior to merging, the pipeline must check for version collisions with parallel merges/releases and require or automate a bump to a higher, unique value if a collision occurs.
+- **Version Gates:** The CI/CD pipeline must enforce that any PR with code changes bumps the project/module version. Prior to merging, the pipeline must check for version collisions with parallel merges/releases and require or automate a bump to a higher, unique value if a collision occurs. Any automated bump must be visible and finalized in the PR before merge — the operator sees and verifies the final version state before it lands (*Pull Request Versioning*, `CLAUDE.md`).
 - **Post-Merge Release & Summary:** Upon merging a PR, the deployment/release workflow must display or publish a brief summary of what was done and the version containing the changes (e.g., as a GitHub Release, Slack notification, or release log).
 
 ### Stable Auto-Pipeline: Fix → Affected Tests → Merge Queue → Auto-Merge
