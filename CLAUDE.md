@@ -55,6 +55,8 @@ A system is integral only when every part of it (code, data, documentation, test
 6.  **Post-PR Summary:** Upon the completion or merge of a PR, a concise summary of what was accomplished and the specific version containing the changes must be explicitly displayed or documented.
 7.  **Rule Synchronization Integrity:** When rules are updated in the source repository (the canon — <https://github.com/mre-vd/human-first-canon>) and synchronized to target projects, the updated files must be committed and pushed to those projects to keep all agents and developers in alignment. Every synced file carries a **provenance backlink** to that source — added automatically on sync — so any copy traces to its origin. Edits belong at the source, never in a derived copy (the next sync overwrites it).
 
+**Manifestation Citation — Layers Name Their Origin:** Each face of Integrity above (and every cross-file citation in this canon) names the document that authors and maintains its operative definition. These are **reference citations** — transparent naming of the source of truth — not conceptual dependencies: the floor stands without the domain layer. Edits belong at the source (point 7); the next sync overwrites a derived copy.
+
 ### Modular Sovereignty: The Body of Organs
 
 The system must be built as a collection of autonomous "organs."

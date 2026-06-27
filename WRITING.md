@@ -4,8 +4,8 @@ Words are a sovereign domain — copy, microcopy, UI strings, button and error t
 
 ## Writing Style & Tone
 
-- **Clarity & Truth:** The system must be well-described and informative. The system should guide the user informatively (using clear instructions and hints) from point A to point B. Emotional text is noise; truth is quiet.
-- **Objective Phrasing:** Use objective, third-person phrasing. Define value propositions without taking responsibility for individual user decisions.
+- **Clarity & Truth:** The system must be well-described and informative. The system should guide the person informatively (using clear, explicit instructions) from point A to point B. Emotional text is noise; truth is quiet.
+- **Objective Phrasing:** Use objective, third-person phrasing. Define value propositions without taking responsibility for individual operator decisions.
 - **Quiet Tool Philosophy:** Emphasize focus on real value over noise.
 - **Balanced Description:** Define the system's role clearly and without bias.
 - **Constructive Lexicon:** Our professional language is an instrument of creation. We use terms like "create", "align", "action space", "harmonize", and "nurture". Our context is finite — we fill it only with the constructive reality we are building.

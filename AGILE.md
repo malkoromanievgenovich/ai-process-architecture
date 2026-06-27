@@ -25,6 +25,7 @@ Ceremony exists only to help humans deliver and learn together. A ritual that st
 - **Product backlog:** the single ordered list of what could be done; refined continuously, with only the top made ready.
 - **Sprint backlog:** the Sprint Goal plus the slice pulled to reach it; owned by the team.
 - **Increment:** working, releasable software each sprint.
+- **Definition of Ready:** a story enters the Sprint backlog only when its value is named, its acceptance criteria are written and agreed with the stakeholder, and blocking dependencies are surfaced and cleared — or explicitly accepted as Sprint risk. Ready gates entry; Done gates exit; together they guard the integrity of the flow (*Integrity Is Health*, `PRINCIPLES.md`).
 - **Definition of Done:** an explicit, shared checklist of what "complete" means — tested, reviewed, integrated, documented; nothing is Done until it meets it (*Completeness of Execution*, `CLAUDE.md`).
 - **WIP limits & finishing:** limit work in progress; a thing half-done delivers nothing. Optimize for finishing, not starting (*Finish to Zero*, `CLAUDE.md`).
 

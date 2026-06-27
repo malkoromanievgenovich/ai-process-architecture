@@ -24,7 +24,7 @@ Analysis is a Mirror, not a Gate (`PRINCIPLES.md`): it surfaces needs, options, 
 
 - **Given / When / Then:** preconditions, action, observable result — concrete and binary (met or not).
 - **Agreed before build, with the stakeholder:** acceptance is settled up front, not invented after the fact.
-- **Feeds Definition of Ready:** clear value, criteria, and dependencies make a story ready to start (`AGILE.md`).
+- **Feeds Definition of Ready:** clear value, criteria, and dependencies make a story ready to start (`AGILE.md`, Definition of Ready).
 
 ## Prioritization & Scope
 
