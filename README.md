@@ -1,96 +1,85 @@
 # Human-First Canon
 
-Канон для побудови програмних систем, де **людина лишається суверенною**: вона думає й вирішує, а система — це тупий, добре зроблений інструмент, що служить.
+Набір правил про те, як робити програми, де **головна завжди людина**.
 
-Це не «налаштування ШІ», а **статут**: як будувати так, щоб воля й досвід належали людині. ШІ-помічник лише пропонує варіанти й виконує схвалені команди — він **ніколи не вирішує сам**. А системи, які ми будуємо, не «думають»: вони приймають введене, структурують за правилами, зберігають і передають.
+Ідея проста: **людина думає і вирішує, а програма чи ШІ — лише інструмент**. Він допомагає, але сам по собі нічого не робить.
 
-*(Scroll down for the English version)*
+*(English below)*
 
-## Серце (апекс)
+## Три головні правила
+* **Людина керує.** ШІ пропонує варіанти й виконує тільки підтверджені команди. Без самодіяльності.
+* **Без заборон.** Система може показати ризики — як дзеркало, — але вибір завжди за вами. Забороняти вона не має права.
+* **Зробив — і тихо.** Код виконує своє і затихає. Без фонового шуму й зайвих сповіщень.
 
-*   **Воля й досвід належать людині.** Система допомагає вчитися й називає речі своїми іменами — не проживає життя за людину.
-*   **Кінцева міра — людина.** Людина не «користувач», а причина, заради якої система існує.
-*   **Дзеркало, не Ворота.** Система називає наслідки як факти й лишає вибір людині — вона не забороняє і не вирішує замість неї.
-*   **Система не думає.** Думає лише людина; система тупа до рішень, точна до рутини.
-*   **Достатньо, щоб служити — не досконало.** Завершив — і тиша (Операційний Спокій).
+## Із чого складається канон
+Набір `.md`-файлів під різні задачі.
 
-## Хто діє
+**Діють завжди:**
+* [PRINCIPLES.md](PRINCIPLES.md) — філософія та базові правила.
+* [CLAUDE.md](CLAUDE.md) — як ми пишемо код.
 
-Людина — оператор і єдиний, хто вирішує (Source of Truth). ШІ-помічник пропонує варіанти й виконує схвалене, ніколи не діючи самостійно. Канон керує **кожним агентом**, не лише одним.
+**Читати за потреби:**
+* [WRITING.md](WRITING.md) — тексти
+* [DESIGN.md](DESIGN.md) — дизайн і UI/UX
+* [STACKS.md](STACKS.md) — код під різні мови та фреймворки
+* [DATABASE.md](DATABASE.md) — бази даних
+* [DEVOPS.md](DEVOPS.md) — деплой та інфраструктура
+* [TESTING.md](TESTING.md) — тестування
+* [SECURITY.md](SECURITY.md) — безпека
+* [ANALYSIS.md](ANALYSIS.md) — вимоги та аналітика
+* [AGILE.md](AGILE.md) — організація роботи
 
-## Структура
+Працюєте через Gemini? Почніть із [GEMINI.md](GEMINI.md) — він веде до тих самих `PRINCIPLES.md`.
 
-Канон — родина суверенних доменних файлів (єдине джерело правди). `CLAUDE.md` і апекс `PRINCIPLES.md` діють завжди; решта читається **лише коли задача їх торкається** (карта маршрутизації у `CLAUDE.md` — економія контексту й ресурсу):
+## Як користуватися
+Підключіть правила до своїх проєктів, щоб агенти знали, як ви працюєте.
 
-*   `PRINCIPLES.md` — апекс, етика, ментальні правила
-*   `GEMINI.md` — заглушка-покажчик на `PRINCIPLES.md` (для тих, хто юзає Gemini)
-*   `WRITING.md` — текст, тон, копірайт
-*   `CLAUDE.md` — інженерія: цілісність + архітектура
-*   `STACKS.md` — код-стандарти по стеках (мови/фреймворки)
-*   `DESIGN.md` — UI/UX дизайн
-*   `DATABASE.md` — дані (SQL & NoSQL)
-*   `DEVOPS.md` — DevOps, CI/CD, хмара/інфра
-*   `TESTING.md` — QA і тестування
-*   `SECURITY.md` — безпека
-*   `ANALYSIS.md` — бізнес-аналітика (вимоги, історії, критерії приймання)
-*   `AGILE.md` — agile-постачання та Scrum
+1. Редагуйте правила **тільки тут**, у цьому репозиторії.
+2. Додайте проєкти в `sync-config.json` (приклад — у `sync-config.example.json`).
+3. Розкидайте по проєктах: `node scripts/sync.js`
+4. Перевірте, що все ок: `node scripts/validate.js`
 
-## Як користуватись
+Синхронізуйте вручну і лише коли щось змінили — без фонових скриптів.
 
-Канон написаний **для Claude** (Claude Code — основний агент): `CLAUDE.md` — його завжди-завантажені інструкції, `PRINCIPLES.md` — апекс-підлога. Хто юзає Gemini — заглушка `GEMINI.md` веде на той самий `PRINCIPLES.md`.
-
-1.  Правиш правила **лише тут**, у джерелі.
-2.  Додаєш проєкт у `sync-config.json` (`{ "name", "path" }`; шаблон — `sync-config.example.json`).
-3.  `node scripts/sync.js` — розкладає всі канон-файли по налаштованих проєктах (кожна копія з provenance-посиланням; перезаписується наступним синком).
-4.  `node scripts/validate.js` — перевіряє цілісність (заголовки майстрів, конфіг).
-
-Синк запускаєш **свідомо**, коли є зміна — жодного фонового крона (це наш *Operational Rest*). У проєкті агент завжди читає `CLAUDE.md` (+ апекс), а доменні файли — лише коли задача їх торкається.
-
----
 ---
 
 # Human-First Canon (English)
 
-A canon for building software systems where **the human stays sovereign**: the human thinks and decides, and the system is a dumb, well-made tool that serves.
+A set of rules for building software where **the human stays in charge**.
 
-This is not "AI configuration" but a **charter**: how to build so that will and experience belong to the human. The AI assistant only proposes options and executes approved commands — it **never decides on its own**. And the systems we build do not "think": they take input, structure it by rules, store, and transmit.
+The idea is simple: **the human thinks and decides, while the software or AI is just a tool** — it helps, but never acts on its own.
 
-## The Heart (the apex)
+## Three core rules
+* **Human in control.** The AI offers options and runs only approved commands. No autonomous moves.
+* **No blocking.** The system can show risks — like a mirror — but the choice is always yours. It may not forbid anything.
+* **Do the job, then go quiet.** Code does its work and falls silent. No background noise, no needless notifications.
 
-*   **Will and experience belong to the human.** The system helps a person learn and names things by their true names — it does not live their life for them.
-*   **The final measure is the human.** The human is not a "user" but the reason the system exists.
-*   **Mirror, not Gate.** The system names consequences as facts and leaves the choice with the human — it never forbids or decides in their place.
-*   **The system does not think.** Only the human thinks; the system is dumb to decisions, precise to routine.
-*   **Enough to serve, not perfect.** When it is done, it rests (Operational Rest).
+## What the canon is made of
+A set of `.md` files for different tasks.
 
-## Who Acts
+**Always active:**
+* [PRINCIPLES.md](PRINCIPLES.md) — philosophy and core rules.
+* [CLAUDE.md](CLAUDE.md) — how we write code.
 
-The human is the operator and the only one who decides (Source of Truth). The AI assistant proposes options and executes what is approved, never acting on its own. The canon governs **every agent**, not just one.
+**Read when needed:**
+* [WRITING.md](WRITING.md) — text and copy
+* [DESIGN.md](DESIGN.md) — design and UI/UX
+* [STACKS.md](STACKS.md) — code for different languages and frameworks
+* [DATABASE.md](DATABASE.md) — databases
+* [DEVOPS.md](DEVOPS.md) — deployment and infrastructure
+* [TESTING.md](TESTING.md) — testing
+* [SECURITY.md](SECURITY.md) — security
+* [ANALYSIS.md](ANALYSIS.md) — requirements and analysis
+* [AGILE.md](AGILE.md) — workflow
 
-## Structure
+Using Gemini? Start with [GEMINI.md](GEMINI.md) — it points to the same `PRINCIPLES.md`.
 
-The canon is a family of sovereign domain files (the Single Source of Truth). `CLAUDE.md` and the `PRINCIPLES.md` apex are always in force; every other file is read **only when the task touches it** (the routing map in `CLAUDE.md` — saving context and resources):
+## How to use
+Sync the rules into your projects so your agents know how you work.
 
-*   `PRINCIPLES.md` — apex, ethics, mental rules
-*   `GEMINI.md` — pointer stub to `PRINCIPLES.md` (for those who run Gemini)
-*   `WRITING.md` — writing, tone, content
-*   `CLAUDE.md` — engineering: integrity + architecture
-*   `STACKS.md` — per-stack code standards (languages/frameworks)
-*   `DESIGN.md` — UI/UX design
-*   `DATABASE.md` — data (SQL & NoSQL)
-*   `DEVOPS.md` — DevOps, CI/CD, cloud/infra
-*   `TESTING.md` — QA & testing
-*   `SECURITY.md` — security
-*   `ANALYSIS.md` — business analysis (requirements, stories, acceptance)
-*   `AGILE.md` — agile delivery & Scrum
+1. Edit the rules **here only**, in this repository.
+2. Add your projects to `sync-config.json` (see `sync-config.example.json`).
+3. Sync to projects: `node scripts/sync.js`
+4. Check everything: `node scripts/validate.js`
 
-## How to Use
-
-This canon is written **for Claude** (Claude Code — the primary agent): `CLAUDE.md` is its always-loaded instructions, `PRINCIPLES.md` is the apex floor. If you run Gemini, the `GEMINI.md` stub points to the same `PRINCIPLES.md`.
-
-1.  Change rules **only here**, at the source.
-2.  Add a project to `sync-config.json` (`{ "name", "path" }`; template: `sync-config.example.json`).
-3.  `node scripts/sync.js` — writes all canon files into the configured projects (each copy carries a provenance backlink; overwritten on the next sync).
-4.  `node scripts/validate.js` — checks integrity (master headers, config).
-
-Run sync **deliberately**, when something changed — there is no background cron (that is our *Operational Rest*). In a project, the agent always reads `CLAUDE.md` (+ the apex), and pulls domain files only when the task touches them.
+Sync manually, and only when something changed — no background scripts.
