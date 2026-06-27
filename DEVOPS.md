@@ -9,16 +9,6 @@ Platform and infrastructure engineering is a sovereign domain — kept separate 
 - **IaC (Infrastructure as Code):** Every piece of infrastructure is defined in code (Terraform, Pulumi, or K8s manifests). Manual changes via Cloud Consoles create "ghost" infrastructure, architectural drift, and lead to deployment failures as the code no longer reflects reality.
 - **GitOps:** The state of the infrastructure reflects the state of the Git repository.
 
-### Operational Rest for Deployed Systems — Eat Only on Demand
-
-The deployment-runtime manifestation of **The Law of Operational Rest / Zero-Active Waste** (`GEMINI.md`). A deployed system spends resources **only to serve a real request** — to give a present user the thing they came for; with no one to serve, it returns to a minimal-resource sleep. Idle compute burning money and energy for no outcome is *Waste*, a sickness to name (*Integrity Is Health*, `GEMINI.md`).
-
-- **Scale to zero by default.** Prefer request-driven compute that costs ~nothing at rest — serverless (Lambda / Cloud Run / Functions), scale-to-zero containers (Knative, Cloud Run `min-instances=0`), or autoscalers that drop to zero replicas. A service no one is calling holds no warm compute unless a named force requires a floor.
-- **Wake on demand, sleep after.** The trigger is a real user request or a genuine event — never a clock or a "just-in-case" warm pool. Once the request is served, release the resources and return to rest (*Resource Cleanup*, *Anti-Polling Bias*, `GEMINI.md`).
-- **Event-driven over polling.** Queues, webhooks, and subscriptions instead of cron-poll loops that wake to find nothing to do. If a schedule is unavoidable, make its work proportional to real backlog, not a fixed idle sweep.
-- **A floor only when justified.** A warm baseline (min instances, provisioned concurrency) is bought **deliberately** against a named requirement — a p99 latency SLO, cold-start on a critical path — never as a default. Right-size `requests`/`limits` and autoscale on the real signal (RPS, queue depth, concurrency), not on peak-just-in-case. This is the counterweight: *resilience is not waste* (`GEMINI.md`), so a margin that protects a real user is an outcome, not idle burn.
-- **Idle is measured, not assumed.** Track utilization and scale-to-zero coverage; an always-on service with near-zero traffic is a flag to name (pairs with **Budgets** and **Resource Tagging** below). Rest is correct silence; idle waste is not.
-
 ### CI/CD (GitHub Actions)
 
 - **Workflow Modularity:** Use reusable workflows to avoid duplication.
@@ -85,6 +75,16 @@ For **self-hosted CI**, install the runner **as a service** so it starts at boot
 - **Managed Services First:** Prefer managed services (RDS, SQS, S3) over self-hosting on EC2/containers.
 - **Resource Tagging:** Every resource MUST have standard tags: `Project`, `Environment`, `Owner`, and `CostCenter`.
 - **Least Privilege:** Apply IAM roles and policies with the minimum permissions required for the task.
+
+### Operational Rest Has Zero Cost — Spend Follows Demand
+
+The cloud/cost manifestation of **The Law of Operational Rest — Zero-Active Waste** (`GEMINI.md`; *The Principle of Silence & Focus*, `CLAUDE.md`). A deployed system at rest must draw no resources and cost nothing; spend is expended only to serve a real demand, after which the system returns to free silence. Idle is the baseline, and idle is free.
+
+- **Scale to zero by default.** Stateless compute scales to zero when idle (serverless / `min-instances=0`). Always-warm capacity is an exception that must name its force — a real latency SLA — never a default. Warmth is paid only where a human's wait is the named cost.
+- **No standing resource without a named force.** Every component that runs 24/7 — especially stateful ones (managed databases, caches, brokers) — must justify its idle cost against a named need. Prefer scale-to-zero / pay-per-use managed services (*Managed Services First*). Where a component cannot go to zero, its standing cost is named as a fact to the operator (*The Mirror of Consequences*, `CLAUDE.md`), never left as a silent drain.
+- **Wake on event, not on a clock** (*Trigger over Polling*). Prefer an event/webhook that wakes the system only when real work exists over a schedule that wakes it to find nothing. A poll that finds nothing is wasted draw; if no push channel exists, poll at the lowest frequency the need tolerates.
+- **Right-size and bound the blast radius.** Allocate the smallest CPU/memory that holds the load (*Smallest Mechanism*, `GEMINI.md`); cap maximum scale; set a budget and an alert so a runaway cannot drain spend in silence.
+- **Cost is a named consequence.** Surface the cost shape — idle vs per-use, and the dominant driver — as a technical fact at design and review time, so the operator chooses with full awareness (*The Law of the Name*, `GEMINI.md`). A surprise bill is a Mirror that was withheld.
 
 ### AWS Conventions
 
