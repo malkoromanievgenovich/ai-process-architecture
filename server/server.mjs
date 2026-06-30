@@ -180,14 +180,23 @@ app.post("/api/suggest", async (req, res) => {
   }
 });
 
-// --- Public contributors list (read from the repo on the base branch). ---
+// --- Contributors list (read from the repo on the base branch). ---
+// Uses the authenticated API when a token is set, so it works whether the repo
+// is private or public; falls back to public raw if there's no token.
 app.get("/api/contributors", async (_req, res) => {
   try {
-    const r = await fetch(`https://raw.githubusercontent.com/${GH_REPO}/${GH_BASE}/contributors.json`, {
-      headers: { "user-agent": "nature-audit" },
-    });
-    if (!r.ok) return res.json([]);
-    const list = await r.json();
+    let text;
+    if (GITHUB_TOKEN) {
+      const f = await gh("GET", `/repos/${GH_REPO}/contents/contributors.json?ref=${GH_BASE}`);
+      text = unb64(f.content);
+    } else {
+      const r = await fetch(`https://raw.githubusercontent.com/${GH_REPO}/${GH_BASE}/contributors.json`, {
+        headers: { "user-agent": "nature-audit" },
+      });
+      if (!r.ok) return res.json([]);
+      text = await r.text();
+    }
+    const list = JSON.parse(text);
     res.json(Array.isArray(list) ? list.slice(0, 500) : []);
   } catch {
     res.json([]);

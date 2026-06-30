@@ -236,11 +236,11 @@ async function sendFeedback() {
       body: JSON.stringify({ message: text, context, contributor }),
     });
     const j = await r.json().catch(() => ({}));
-    if (r.ok && j.url) {
-      setStatus(`Дякуємо — створено PR: <a href="${j.url}" target="_blank" rel="noopener">${j.url}</a>`);
+    if (r.ok && j.ok) {
+      setStatus("Дякуємо — пропозицію надіслано авторам на розгляд.");
       $("fbText").value = "";
     } else {
-      setStatus(j.error || "Не вдалося створити PR.");
+      setStatus(j.error || "Не вдалося надіслати.");
     }
   } catch {
     setStatus("Мережа недоступна.");
