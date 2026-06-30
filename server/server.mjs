@@ -6,6 +6,7 @@ import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Readable } from "node:stream";
+import { Firestore } from "@google-cloud/firestore";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOCS_DIR = path.join(__dirname, "..", "docs");
@@ -18,6 +19,30 @@ const GH_BASE = process.env.GITHUB_BASE || "main";
 
 const MODEL = "claude-opus-4-8";
 const MAX_TOKENS = 8000;
+
+// Persistent per-IP daily cap on audit calls (in-memory would reset on scale-to-zero).
+// One full audit = analyze + a few refinements + the audit step, so the cap counts
+// calls, not "audits" — the default leaves room for ~one session per IP per UTC day.
+const AUDIT_DAILY_MAX = Number(process.env.AUDIT_DAILY_MAX || 8);
+const firestore = new Firestore({ databaseId: process.env.FIRESTORE_DB || "nature-audit" });
+
+async function overDailyCap(ip) {
+  if (!ip || ip === "?") return false;
+  const day = new Date().toISOString().slice(0, 10); // UTC date
+  const ref = firestore.collection("audit_quota").doc(`${day}_${ip}`);
+  try {
+    return await firestore.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      const n = snap.exists ? snap.data().n || 0 : 0;
+      if (n >= AUDIT_DAILY_MAX) return true;
+      tx.set(ref, { n: n + 1, day, at: new Date().toISOString() }, { merge: true });
+      return false;
+    });
+  } catch (e) {
+    console.error("quota check failed (fail-open):", e.message);
+    return false; // don't block legit users if Firestore hiccups; the key spend cap is the hard bound
+  }
+}
 
 const app = express();
 app.set("trust proxy", true);
@@ -56,6 +81,7 @@ app.post("/api/audit", async (req, res) => {
   if (foreignOrigin(req)) return res.status(403).json({ error: "Заборонене джерело запиту." });
   if (!ANTHROPIC_API_KEY) return res.status(500).json({ error: "Ключ Клода не налаштовано на сервері." });
   if (rateLimited(clientIp(req), 10)) return res.status(429).json({ error: "Забагато запитів. Спробуйте за хвилину." });
+  if (await overDailyCap(clientIp(req))) return res.status(429).json({ error: "На сьогодні ліміт аудитів вичерпано. Спробуйте завтра." });
 
   const { system, messages, tools } = req.body || {};
   if (typeof system !== "string" || !Array.isArray(messages)) {
