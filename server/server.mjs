@@ -1,9 +1,8 @@
 // Minimal backend for the Nature-Preserving Audit.
-// Holds the Claude key (so the frontend never sees it) and emails feedback.
-// Serves the static frontend from ../docs, so one Cloud Run service does both.
+// Holds the Claude key (so the frontend never sees it), opens GitHub PRs for
+// canon-improvement suggestions, and serves the static frontend from ../docs.
 
 import express from "express";
-import nodemailer from "nodemailer";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Readable } from "node:stream";
@@ -13,9 +12,9 @@ const DOCS_DIR = path.join(__dirname, "..", "docs");
 
 const PORT = process.env.PORT || 8080;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const GMAIL_USER = process.env.GMAIL_USER;
-const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD;
-const FEEDBACK_TO = process.env.FEEDBACK_TO || "roman.malko@gmail.com";
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GH_REPO = process.env.GITHUB_REPO || "malkoromanievgenovich/human-first-canon";
+const GH_BASE = process.env.GITHUB_BASE || "main";
 
 const MODEL = "claude-opus-4-8";
 const MAX_TOKENS = 8000;
@@ -39,7 +38,7 @@ function rateLimited(ip, max, windowMs = 60_000) {
 const clientIp = (req) =>
   (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip || "?";
 
-// Audit proxy — injects the server-held key and streams the SSE response through unchanged.
+// --- Audit proxy: injects the server-held key, streams the SSE response through. ---
 app.post("/api/audit", async (req, res) => {
   if (!ANTHROPIC_API_KEY) return res.status(500).json({ error: "Ключ Клода не налаштовано на сервері." });
   if (rateLimited(clientIp(req), 20)) return res.status(429).json({ error: "Забагато запитів. Спробуйте за хвилину." });
@@ -48,7 +47,6 @@ app.post("/api/audit", async (req, res) => {
   if (typeof system !== "string" || !Array.isArray(messages)) {
     return res.status(400).json({ error: "Некоректний запит." });
   }
-  // Whitelist tools — only the web_search server tool is allowed through.
   const safeTools = Array.isArray(tools)
     ? tools.filter((t) => t && t.type === "web_search_20260209")
     : [];
@@ -84,38 +82,104 @@ app.post("/api/audit", async (req, res) => {
   Readable.fromWeb(upstream.body).pipe(res);
 });
 
-// Feedback — emails the authors via Gmail SMTP.
-let transport = null;
-const mailer = () =>
-  (transport ||= nodemailer.createTransport({
-    service: "gmail",
-    auth: { user: GMAIL_USER, pass: GMAIL_APP_PASSWORD },
-  }));
+// --- GitHub helpers ---
+const ghHeaders = () => ({
+  authorization: `Bearer ${GITHUB_TOKEN}`,
+  accept: "application/vnd.github+json",
+  "user-agent": "nature-audit",
+  "content-type": "application/json",
+});
+async function gh(method, p, body) {
+  const r = await fetch(`https://api.github.com${p}`, {
+    method,
+    headers: ghHeaders(),
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.message || `GitHub ${r.status}`);
+  return data;
+}
+const b64 = (s) => Buffer.from(s, "utf8").toString("base64");
+const unb64 = (s) => Buffer.from(s, "base64").toString("utf8");
+const clean = (s, n) => String(s || "").trim().slice(0, n);
 
-app.post("/api/feedback", async (req, res) => {
-  if (!GMAIL_USER || !GMAIL_APP_PASSWORD) return res.status(500).json({ error: "Пошту не налаштовано на сервері." });
+// --- Suggestion → Pull Request (author reviews & merges). ---
+app.post("/api/suggest", async (req, res) => {
+  if (!GITHUB_TOKEN) return res.status(500).json({ error: "GitHub не налаштовано на сервері." });
   if (rateLimited(clientIp(req), 5)) return res.status(429).json({ error: "Забагато надсилань. Спробуйте за хвилину." });
 
-  const { message, context } = req.body || {};
-  if (typeof message !== "string" || !message.trim()) return res.status(400).json({ error: "Порожнє повідомлення." });
+  const message = clean(req.body?.message, 8000);
+  const context = clean(req.body?.context, 12000);
+  if (!message) return res.status(400).json({ error: "Порожнє повідомлення." });
 
-  const body =
-    message.slice(0, 8000) +
-    (context ? `\n\n--- контекст ---\n${String(context).slice(0, 8000)}` : "");
+  let contributor = null;
+  const c = req.body?.contributor;
+  if (c && clean(c.name, 80)) {
+    contributor = { name: clean(c.name, 80), company: clean(c.company, 80), link: clean(c.link, 200), at: new Date().toISOString() };
+  }
+
+  const id = new Date().toISOString().replace(/[:.]/g, "-") + "-" + Math.random().toString(36).slice(2, 7);
+  const branch = `suggest-${id}`;
+
   try {
-    await mailer().sendMail({
-      from: GMAIL_USER,
-      to: FEEDBACK_TO,
-      subject: "Спостереження з аудиту (Nature-Preserving Audit)",
-      text: body,
+    const baseRef = await gh("GET", `/repos/${GH_REPO}/git/ref/heads/${GH_BASE}`);
+    await gh("POST", `/repos/${GH_REPO}/git/refs`, { ref: `refs/heads/${branch}`, sha: baseRef.object.sha });
+
+    const md =
+      `# Покращення канону\n\n${message}\n` +
+      (contributor ? `\n_Запропонував(ла): ${contributor.name}${contributor.company ? `, ${contributor.company}` : ""}_\n` : "") +
+      (context ? `\n## Контекст\n\n${context}\n` : "");
+    await gh("PUT", `/repos/${GH_REPO}/contents/suggestions/${id}.md`, {
+      message: `Покращення канону (${id})`,
+      content: b64(md),
+      branch,
     });
-    res.json({ ok: true });
-  } catch {
-    res.status(502).json({ error: "Не вдалося надіслати." });
+
+    if (contributor) {
+      let list = [];
+      let sha;
+      try {
+        const cur = await gh("GET", `/repos/${GH_REPO}/contents/contributors.json?ref=${branch}`);
+        sha = cur.sha;
+        list = JSON.parse(unb64(cur.content));
+        if (!Array.isArray(list)) list = [];
+      } catch { /* file may not exist yet */ }
+      list.push(contributor);
+      await gh("PUT", `/repos/${GH_REPO}/contents/contributors.json`, {
+        message: `Додати до списку тих, хто покращив канони: ${contributor.name}`,
+        content: b64(JSON.stringify(list, null, 2) + "\n"),
+        branch,
+        ...(sha ? { sha } : {}),
+      });
+    }
+
+    const pr = await gh("POST", `/repos/${GH_REPO}/pulls`, {
+      title: `Покращення канону: ${message.slice(0, 60)}${message.length > 60 ? "…" : ""}`,
+      head: branch,
+      base: GH_BASE,
+      body: md,
+    });
+    res.json({ ok: true, url: pr.html_url });
+  } catch (e) {
+    res.status(502).json({ error: "Не вдалося створити PR: " + e.message });
   }
 });
 
-// Static frontend.
+// --- Public contributors list (read from the repo on the base branch). ---
+app.get("/api/contributors", async (_req, res) => {
+  try {
+    const r = await fetch(`https://raw.githubusercontent.com/${GH_REPO}/${GH_BASE}/contributors.json`, {
+      headers: { "user-agent": "nature-audit" },
+    });
+    if (!r.ok) return res.json([]);
+    const list = await r.json();
+    res.json(Array.isArray(list) ? list.slice(0, 500) : []);
+  } catch {
+    res.json([]);
+  }
+});
+
+// --- Static frontend ---
 app.use(express.static(DOCS_DIR, { extensions: ["html"] }));
 app.get("*", (_req, res) => res.sendFile(path.join(DOCS_DIR, "index.html")));
 
