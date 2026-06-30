@@ -59,6 +59,13 @@ const AUDIT_SYSTEM =
   "собою. Не наказуйте і не вирішуйте за людину — показуйте, а вибір лишіть їй. Подавайте це як спробу зібрати картину й " +
   "рекомендацію, не як остаточну правду чи вирок; де не певні — так і кажіть. Пишіть мовою продукту, тепло й розмовно, без термінів.";
 
+const SUGGEST_SYSTEM =
+  "Ви аналізуєте сесію аудиту, щоб знайти, що можна покращити в каноні чи в самому інструменті. " +
+  "Найцінніший сигнал — місця, де користувач ВАС виправляв, уточнюючи портрет: кожне виправлення показує, де " +
+  "метод чи припущення промахнулися. На основі цього напишіть коротку чернетку пропозиції від першої особи " +
+  "(«Я помітив, що…»), і одним рядком — звідки висновок (з якого саме уточнення). Якщо нічого вартого уваги нема — " +
+  "так і скажіть, без вигадок. Спирайтеся лише на цю сесію. Користувач канонів не знає — формулюйте по суті, просто.";
+
 /* ----- streaming call via our backend (the Claude key lives server-side) ----- */
 async function streamClaude({ system, messages, tools, phase, onText, onDone, onError }) {
   let res;
@@ -190,7 +197,7 @@ function startFlow() {
 }
 
 /* ----- suggest a canon improvement (opens a PR via the backend) ----- */
-function openFeedback() {
+async function openFeedback() {
   $("fbStatus").hidden = true;
   $("fbText").value = "";
   $("fbCtx").checked = false;
@@ -200,6 +207,24 @@ function openFeedback() {
   $("fbCompany").value = "";
   $("fbLink").value = "";
   $("fbModal").hidden = false;
+
+  // Claude drafts the suggestion from the session — especially where the user
+  // corrected it during the portrait step (that reveals the method's blind spots).
+  if (!conversation.length) return;
+  const ta = $("fbText");
+  ta.disabled = true;
+  ta.placeholder = "Клод аналізує сесію…";
+  await streamClaude({
+    system: SUGGEST_SYSTEM,
+    messages: [
+      ...conversation,
+      { role: "user", content: "На основі цієї сесії — особливо там, де я вас виправляв — що варто покращити в каноні чи інструменті? Коротко, як чернетку." },
+    ],
+    phase: "suggest",
+    onText: (full) => (ta.value = full),
+    onError: () => { ta.placeholder = "Що варто покращити?"; ta.disabled = false; },
+    onDone: () => { ta.disabled = false; ta.placeholder = "Що варто покращити?"; },
+  });
 }
 function closeFeedback() {
   $("fbModal").hidden = true;
@@ -274,6 +299,44 @@ async function loadContributors() {
     }
     $("creditsBox").hidden = false;
   } catch { /* silent — section just stays hidden */ }
+}
+
+/* ----- canon reader (no black box — show what governs the audit) ----- */
+async function openCanon() {
+  $("canonModal").hidden = false;
+  $("canonBody").textContent = "Завантаження…";
+  $("canonNav").innerHTML = "";
+  try {
+    const r = await fetch("/api/canon");
+    const { files } = await r.json();
+    for (const f of files || []) {
+      const b = document.createElement("button");
+      b.className = "btn ghost canon-tab";
+      b.textContent = f.replace(/\.md$/, "");
+      b.addEventListener("click", () => loadCanonFile(f, b));
+      $("canonNav").appendChild(b);
+    }
+    const first = $("canonNav").querySelector("button");
+    if (first) loadCanonFile((files || [])[0], first);
+    else $("canonBody").textContent = "Канон недоступний.";
+  } catch {
+    $("canonBody").textContent = "Не вдалося завантажити канон.";
+  }
+}
+async function loadCanonFile(file, btn) {
+  document.querySelectorAll(".canon-tab").forEach((b) => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  $("canonBody").textContent = "Завантаження…";
+  try {
+    const r = await fetch("/api/canon?file=" + encodeURIComponent(file));
+    $("canonBody").textContent = r.ok ? await r.text() : "Не вдалося завантажити файл.";
+    $("canonBody").scrollTop = 0;
+  } catch {
+    $("canonBody").textContent = "Мережа недоступна.";
+  }
+}
+function closeCanon() {
+  $("canonModal").hidden = true;
 }
 
 async function analyze() {
@@ -415,6 +478,8 @@ document.addEventListener("click", (e) => {
     case "fb-send": sendFeedback(); break;
     case "fb-close": closeFeedback(); break;
     case "fb-toggle": toggleWho(); break;
+    case "canon": openCanon(); break;
+    case "canon-close": closeCanon(); break;
     case "restart": restart(); break;
   }
 });

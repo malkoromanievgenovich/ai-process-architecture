@@ -64,7 +64,7 @@
 
     <footer class="foot">
       <span>Останнє слово завжди за вами.</span>
-      <span>Чистий аудит. Без аналітики й трекерів.</span>
+      <span><button class="linkbtn" data-go="canon">Канони</button> · Чистий аудит. Без аналітики й трекерів.</span>
     </footer>
   </main>
 
@@ -72,7 +72,7 @@
   <div id="fbModal" class="modal" hidden>
     <div class="modal-card">
       <h3>Запропонувати покращення канону</h3>
-      <p class="fine">Якщо в роботі з системою виринуло щось, що могло б покращити канон чи сам інструмент — напишіть. Це створить Pull Request у репозиторії канону; автори переглянуть і вирішать.</p>
+      <p class="fine">Клод склав чернетку з вашої сесії — особливо з того, де ви його виправляли. Відредагуйте, додайте своє або надішліть як є. Це створить Pull Request у репозиторії канону; автори переглянуть і вирішать.</p>
       <textarea id="fbText" class="field area" rows="5" placeholder="Що варто покращити?"></textarea>
       <label class="fine fbcheck"><input type="checkbox" id="fbCtx" /> Додати картину продукту й аудит як контекст (увійде в Pull Request)</label>
       <label class="fine fbcheck"><input type="checkbox" id="fbShow" data-go="fb-toggle" /> Показати мене серед тих, хто покращив канони</label>
@@ -86,6 +86,17 @@
         <button class="btn" data-go="fb-send">Надіслати</button>
         <button class="btn ghost" data-go="fb-close">Закрити</button>
       </div>
+    </div>
+  </div>
+
+  <!-- CANON READER -->
+  <div id="canonModal" class="modal" hidden>
+    <div class="modal-card canon-card">
+      <h3>Канони</h3>
+      <p class="fine">Правила, за якими працює цей аудит — відкрито, щоб це не було чорною скринькою.</p>
+      <div id="canonNav" class="canon-nav"></div>
+      <pre id="canonBody" class="canon-body"></pre>
+      <div class="row"><button class="btn ghost" data-go="canon-close">Закрити</button></div>
     </div>
   </div>
 

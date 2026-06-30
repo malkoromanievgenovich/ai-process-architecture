@@ -242,6 +242,28 @@ app.get("/api/contributors", async (_req, res) => {
   }
 });
 
+// --- Canon files (read-only; no black box — the user can see what governs the audit). ---
+const CANON_FILES = [
+  "PRINCIPLES.md", "WRITING.md", "DESIGN.md", "STACKS.md", "DATABASE.md",
+  "DEVOPS.md", "TESTING.md", "SECURITY.md", "ANALYSIS.md", "AGILE.md", "NATURE.md", "CLAUDE.md",
+];
+app.get("/api/canon", async (req, res) => {
+  const file = req.query.file;
+  if (!file) return res.json({ files: CANON_FILES });
+  if (!CANON_FILES.includes(file)) return res.status(400).json({ error: "Невідомий файл." });
+  try {
+    if (GITHUB_TOKEN) {
+      const f = await gh("GET", `/repos/${GH_REPO}/contents/${encodeURIComponent(file)}?ref=${GH_BASE}`);
+      return res.type("text/plain; charset=utf-8").send(unb64(f.content));
+    }
+    const r = await fetch(`https://raw.githubusercontent.com/${GH_REPO}/${GH_BASE}/${file}`, { headers: { "user-agent": "nature-audit" } });
+    if (!r.ok) return res.status(404).json({ error: "Не знайдено." });
+    return res.type("text/plain; charset=utf-8").send(await r.text());
+  } catch {
+    return res.status(502).json({ error: "Не вдалося завантажити канон." });
+  }
+});
+
 // --- Static frontend ---
 app.use(express.static(DOCS_DIR, { extensions: ["html"] }));
 app.get("*", (_req, res) => res.sendFile(path.join(DOCS_DIR, "index.html")));
