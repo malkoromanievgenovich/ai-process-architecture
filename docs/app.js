@@ -301,6 +301,29 @@ async function loadContributors() {
   } catch { /* silent — section just stays hidden */ }
 }
 
+/* ----- funds: direct support links (donations go straight to each fund) ----- */
+async function loadFunds() {
+  try {
+    const r = await fetch("/api/funds");
+    const list = await r.json();
+    if (!Array.isArray(list) || !list.length) return;
+    const ul = $("funds");
+    ul.innerHTML = "";
+    for (const f of list) {
+      if (!f || !f.name || !f.link) continue;
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = f.link;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = f.note ? `${f.name} — ${f.note}` : `Підтримати: ${f.name}`;
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
+    if (ul.children.length) $("fundsBox").hidden = false;
+  } catch { /* silent — block stays hidden */ }
+}
+
 /* ----- canon reader (no black box — show what governs the audit) ----- */
 async function openCanon() {
   $("canonModal").hidden = false;
@@ -485,3 +508,4 @@ document.addEventListener("click", (e) => {
 });
 
 loadContributors();
+loadFunds();
