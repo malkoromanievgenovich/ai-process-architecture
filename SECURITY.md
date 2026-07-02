@@ -107,8 +107,9 @@ This checklist serves as a standard for auditing changes.
 ### 3. AI & LLM Security (If applicable)
 
 - **Prompt Injection:** Are user inputs treated as untrusted and clearly separated from system instructions?
-- **Output Sanitization:** Is model output validated and sanitized before being rendered or stored?
-- **Cost Control:** Are there per-user rate limits and budget caps on model calls?
+- **Server-fixed prompts (no open proxy):** Does the endpoint carry a **server-chosen** system prompt (by rule/phase), never one supplied by the caller? Are the size and count of forwarded messages bounded? A backend that relays an arbitrary caller-supplied prompt to the model on the operator's key has handed strangers a free model and an open bill.
+- **Output Sanitization:** Is model output validated and sanitized before being rendered or stored? (For voice/lexicon, see `WRITING.md` — Guard generated output at runtime.)
+- **Cost Control:** Are there per-user rate limits and budget caps on model calls? Is there a hard spend cap on the provider key (the real ceiling)?
 
 ---
 

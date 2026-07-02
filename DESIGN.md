@@ -62,6 +62,12 @@ The principle of intentionally removing noise to improve clarity and focus. Ever
 - **Interface Decluttering:** Hide complex actions behind "Expert" toggles or progressive disclosure. The primary view must show only what is essential for the current task.
 - **Cognitive Load:** Minimize the number of things a person must hold in their head to navigate the interface.
 
+### The Clean Face — Public Surfaces Carry Only What Serves
+
+What goes out to a person — a shared URL, a screen, a link — shows only what serves the person; the working machinery stays backstage.
+- **Clean public links:** a link meant for people is stripped to its domain and the minimum a human needs. Tracking and attribution parameters (`utm_*`, `gclid`, ad ids) stay backstage — server-side, a redirect, or config — and stay out of the link a person reads and shares.
+- **Backstage, not gone:** that cruft may exist for the operator's own accounting; it simply lives elsewhere. Since much of it follows the person, it also answers to the no-watching rule — a tool has no eyes (`SECURITY.md`; PRINCIPLES *The Dumb Tool*).
+
 ### Progressive Disclosure — UI Grows, It Doesn't Dump
 
 An interface reveals structure progressively — it never dumps the whole structure at once, and in a linear flow it never piles spent steps on top of live ones.
@@ -73,6 +79,12 @@ An interface reveals structure progressively — it never dumps the whole struct
 - **Underlying state persists:** what is shown changes between steps; the underlying state — the entered values, the thread, the work so far — continues beneath. Swapping the view never silently drops the person's data.
 - **A clean end:** when the flow completes, it closes to zero with nothing left hanging; the closing screen may carry a brief farewell or summary.
 - **Calm transitions:** the transition is a calm grow-in (a brief fade and rise), never a spinner-circus or motion for its own sake. Honour `prefers-reduced-motion`: when reduced, the next block simply appears — the meaning must not live in the animation alone (*Accessibility — Respect reduced motion*).
+
+### Truthful State — Labels Match Reality
+
+A label states what is true at the moment it shows; it wears the finished name only once the result exists.
+- **Name the state you are in:** while a thing forms, say so ("Складається…", "Аналіз триває…"); show the finished label ("Ось результат") once the result exists. A spinner beside a claim that has not come true keeps the claim untrue (*Visibility of system status*).
+- **Name actions by what they do:** a control that runs analysis is "Проаналізувати", not "Подивитися" — the machine analyses, no one looks. The verb matches the real operation (pairs with `WRITING.md` — the lexicon of the tool's own acts).
 
 ### Conceptual Consistency & Recursive Familiarity
 
