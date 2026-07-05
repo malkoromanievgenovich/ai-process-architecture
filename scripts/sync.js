@@ -35,10 +35,23 @@ function syncProject(project) {
     return;
   }
 
+  // Optional per-project layout: canon files land in `subpath`, except the
+  // files in `rootFiles` which always stay at the project root (e.g. CLAUDE.md,
+  // which the agent auto-loads from root). Absent subpath → flat sync to root.
+  const subpath = project.subpath || '';
+  const rootFiles = project.rootFiles || (subpath ? ['CLAUDE.md'] : []);
+
+  const targetDir = path.join(project.path, subpath);
+  if (subpath && !fs.existsSync(targetDir)) {
+    fs.mkdirSync(targetDir, { recursive: true });
+  }
+
   masterContents.forEach(({ name, content }) => {
     const stamped = `${content.replace(/\s*$/, '')}${PROVENANCE}`;
-    fs.writeFileSync(path.join(project.path, name), stamped, 'utf8');
-    console.log(`  Updated: ${name}`);
+    const dir = rootFiles.includes(name) ? project.path : targetDir;
+    fs.writeFileSync(path.join(dir, name), stamped, 'utf8');
+    const rel = path.relative(project.path, path.join(dir, name));
+    console.log(`  Updated: ${rel}`);
   });
 }
 
