@@ -18,6 +18,7 @@ This document is the single source of truth for UI/UX design: visual layout, com
 
 Before submitting or finalizing any UI/UX change, verify:
 - [ ] **No Dead Ends:** Does every interactive element (button, link, trigger) lead to a logical, terminal outcome or state change?
+- [ ] **Perceivable Affordance:** Does every link look interactive before it is touched — a distinct colour plus a non-colour cue (underline/arrow/icon), never colour alone, with a pointer cursor?
 - [ ] **Component Recursion:** Are we reusing existing design patterns instead of introducing a new ad-hoc style?
 - [ ] **Least Emojis:** Did we check for and remove any accidental emojis?
 
@@ -91,6 +92,7 @@ A label states what is true at the moment it shows; it wears the finished name o
 Interfaces must be architected so that the person's mental model scales effortlessly across the entire system.
 - **Component Recursion:** Reuse interaction patterns (e.g., how a "Workbench" or "Sidebar" opens) identically across all modules.
 - **Predictable Affordance:** Buttons, links, and status indicators must behave exactly the same way on every screen.
+- **Perceivable Affordance:** An interactive element must *look* interactive before it is touched. A link carries a visible signifier — a distinct colour plus one non-colour cue (underline, arrow, or an icon), never colour alone — and a pointer cursor on hover. What is clickable must be tellable from what is inert without hovering or guessing; the signifier is consistent everywhere a link appears (pairs with *Predictable Affordance* and *Recognition rather than recall*).
 - **Spatial Logic:** If "Primary Actions" are at the bottom-right on Screen 1, they must be there on every subsequent screen.
 - **The "Already Known" Test:** Before adding a new UI pattern, ask: "Can I solve this using a pattern the person already knows from other parts of the system?"
 - **Logical Outcomes:** See **No Dead Ends & The Single Door** above — every interaction resolves to a clear state change, confirmation, or next step, matching the design specification.
