@@ -82,6 +82,7 @@ A deployed system at rest must draw no resources and cost nothing; spend is expe
 
 - **Scale to zero by default.** Stateless compute scales to zero when idle (serverless / `min-instances=0`). Always-warm capacity is an exception that must name its force — a real latency SLA — never a default. Warmth is paid only where a human's wait is the named cost.
 - **No standing resource without a named force.** Every component that runs 24/7 — especially stateful ones (managed databases, caches, brokers) — must justify its idle cost against a named need. Prefer scale-to-zero / pay-per-use managed services (*Managed Services First*). Where a component cannot go to zero, its standing cost is named as a fact to the operator, never left as a silent drain.
+- **The database default is serverless, not always-on.** The most common silent drain is a managed database billing 24/7 for a project that sits idle. An always-on Postgres/MySQL is never the default — reach first for a scale-to-zero / pay-per-use tier (serverless Postgres, on-demand tables) that costs nothing at rest. An idle database that costs money each month is a standing resource like any other: it must name its force or it does not exist.
 - **Wake on event, not on a clock.** Prefer an event/webhook that wakes the system only when real work exists over a schedule that wakes it to find nothing. A poll that finds nothing is wasted draw; if no push channel exists, poll at the lowest frequency the need tolerates.
 - **Right-size and bound the blast radius.** Allocate the smallest CPU/memory that holds the load; cap maximum scale; set a budget and an alert so a runaway cannot drain spend in silence.
 - **Cost is a named consequence.** Surface the cost shape — idle vs per-use, and the dominant driver — as a technical fact at design and review time, so the operator chooses with full awareness. A surprise bill is a warning that was withheld.
@@ -95,6 +96,15 @@ The default form of any component is the most minimal, most constrained one that
 - **One axis at a time.** When expansion is justified, widen the single dimension the force demands (more memory, a warm min-instance, a read replica) — not the whole topology. Escalate VM → cluster → mesh only as each prior rung is proven to fall short.
 - **Every expansion carries a standing cost — name it.** Moving off serverless adds idle draw that no longer follows demand. State that cost as a technical fact at the moment of expansion, so the operator accepts it knowingly (*Cost is a named consequence*, above).
 - **Re-collapse when the force disappears.** If the pressure that justified an expansion is gone, the component returns to its minimal form. Standing capacity is not a ratchet; drift back to serverless is part of the lifecycle, not a special project.
+
+### The Deploy Gate — Every "Deploy" Starts at Zero
+
+The two rules above are not design-time theory; they bind to the command. Every **"deploy" / "ship" / "put it live" / "release"** inherits scale-to-zero as its hard default, resolved *before* any provider, service, or tier is chosen. "Deploy" never means "spin up the usual setup" — it means "pick the cheapest form that runs this project at idle (zero), then justify every dollar above zero against a force this specific project names." Whenever a deploy is requested, this gate runs first:
+
+- **Start at zero, always.** The default target for every component is its scale-to-zero form: serverless compute (`min-instances=0`), a serverless / pay-per-use datastore — not a standing VM and not an always-on managed database. A `$7/mo` database that bills while the project sits idle is a rule violation, not a starting point.
+- **Name the cost shape before provisioning, not after the bill.** State each component's idle-vs-per-use cost and the dominant driver to the operator as a technical fact *before* it is created. A cost first learned from an invoice was withheld (*Cost is a named consequence*).
+- **Expand only on this project's proven force.** Widen a single component off zero only where the project names the need — a fast-first-response requirement that cold-start breaks, a stateful store the serverless tier cannot express, a measured throughput ceiling. "Fast feedback for a live product" is a legitimate force; "might need it later" and "it's the usual setup" are not (*Expand only under a named force*).
+- **Idle returns to zero.** After serving demand the deployment draws nothing. Any component that cannot idle to zero has its standing draw named to the operator, never left as a silent monthly drain.
 
 ### AWS Conventions
 

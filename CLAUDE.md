@@ -16,7 +16,7 @@ This file is the floor — it governs all substantive work. Every **other** cano
 | UI/UX, layout, design execution | `DESIGN.md` |
 | Coding in a specific stack | `STACKS.md` (that stack's section) |
 | Database, schema, queries, data modeling | `DATABASE.md` |
-| CI/CD, Docker, Kubernetes, cloud, infrastructure | `DEVOPS.md` |
+| Deploy / ship / release, CI/CD, Docker, Kubernetes, cloud, infrastructure | `DEVOPS.md` (on deploy → **The Deploy Gate**: start at zero) |
 | Tests, QA, test strategy | `TESTING.md` |
 | Auth, secrets, input validation, crypto, LLM-security | `SECURITY.md` |
 | Requirements, user stories, scope, acceptance | `ANALYSIS.md` |
